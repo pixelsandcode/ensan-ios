@@ -26,7 +26,7 @@ class SplashViewController: UIViewController {
 		
 		// Game is on ...
 		self.loadAnimation()
-		UserInfo.setIntroSeen(value: false)
+		//UserInfo.setIntroSeen(value: false)
 	}
 	
 	// MARK: - Animation

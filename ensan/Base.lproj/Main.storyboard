@@ -322,7 +322,7 @@
                         <segue destination="LDZ-N3-EmY" kind="show" identifier="showGuardians" id="1gx-5B-6YY"/>
                         <segue destination="bWZ-8E-XJW" kind="show" identifier="showHurt" id="gSW-li-uY8"/>
                         <segue destination="qvK-NL-WrD" kind="show" identifier="showFine" id="626-5r-Jeb"/>
-                        <segue destination="zZX-eO-ECe" kind="show" identifier="showSignup" id="pP9-sz-sCc"/>
+                        <segue destination="zZX-eO-ECe" kind="show" identifier="showSignUp" id="pP9-sz-sCc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5q-DK-e1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
