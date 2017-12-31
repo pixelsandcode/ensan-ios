@@ -1,14 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="khd-SQ-pXh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSans.ttf">
+            <string>IRANSans</string>
+        </array>
+        <array key="IRANSans_Bold.ttf">
+            <string>IRANSans-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SplashViewController" customModule="ensan" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +28,200 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="uDN-Zl-JGt">
+                                <rect key="frame" x="0.0" y="367" width="375" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Q5B-Mb-HFt"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2c-mt-B6h">
+                                <rect key="frame" x="16" y="28" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="17"/>
+                                <state key="normal" title="قبلی">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Yx-Ku-mRJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rB-AI-K3p">
+                                <rect key="frame" x="313" y="28" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="17"/>
+                                <state key="normal" title="بعدی">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S8L-hg-rCb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="سلامت یا جراحت بعد از وقوع زلزله" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbO-Je-4tP">
+                                <rect key="frame" x="50" y="271" width="275" height="25.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="با یک دکمه" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOl-zF-dgV">
+                                <rect key="frame" x="50" y="233" width="275" height="30"/>
+                                <fontDescription key="fontDescription" name="IRANSans-Bold" family="IRANSans" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LbO-Je-4tP" firstAttribute="trailing" secondItem="OOl-zF-dgV" secondAttribute="trailing" id="9QI-hk-grt"/>
+                            <constraint firstItem="LbO-Je-4tP" firstAttribute="top" secondItem="OOl-zF-dgV" secondAttribute="bottom" constant="8" id="EbW-oO-jDr"/>
+                            <constraint firstItem="LbO-Je-4tP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="Ggz-zQ-W2E"/>
+                            <constraint firstItem="LbO-Je-4tP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="PxW-ba-Dst"/>
+                            <constraint firstAttribute="trailing" secondItem="LbO-Je-4tP" secondAttribute="trailing" constant="50" id="Uzu-nX-A01"/>
+                            <constraint firstAttribute="trailing" secondItem="uDN-Zl-JGt" secondAttribute="trailing" id="aMN-j9-CWm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uDN-Zl-JGt" secondAttribute="bottom" id="lsf-ZA-BLd"/>
+                            <constraint firstItem="OOl-zF-dgV" firstAttribute="leading" secondItem="LbO-Je-4tP" secondAttribute="leading" id="saP-z2-e6I"/>
+                            <constraint firstItem="LbO-Je-4tP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tqA-yH-yGp"/>
+                            <constraint firstItem="uDN-Zl-JGt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uHg-ji-aNa"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4oe-I3-zDk"/>
+                    <connections>
+                        <outlet property="backButton" destination="n2c-mt-B6h" id="Vsi-Fn-pbe"/>
+                        <outlet property="nextButton" destination="6rB-AI-K3p" id="fhn-5x-hXE"/>
+                        <outlet property="subtitleLabel" destination="LbO-Je-4tP" id="1H3-gO-WRM"/>
+                        <outlet property="titleLabel" destination="OOl-zF-dgV" id="t1Z-jL-JOP"/>
+                        <segue destination="oF1-zJ-Jqv" kind="show" identifier="showMain" id="yLo-Ca-HWv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="972" y="38.23088455772114"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="dVB-9L-nQO">
+            <objects>
+                <viewController restorationIdentifier="MainViewController" storyboardIdentifier="MainViewController" id="oF1-zJ-Jqv" customClass="MainViewController" customModule="ensan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fsj-0u-PyY"/>
+                        <viewControllerLayoutGuide type="bottom" id="bV4-qc-PD2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nPS-7n-kLP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.png" translatesAutoresizingMaskIntoConstraints="NO" id="6ke-vb-MmP">
+                                <rect key="frame" x="97" y="223.5" width="180" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="Z74-4Q-Cha"/>
+                                    <constraint firstAttribute="width" constant="180" id="dVa-Vf-veG"/>
+                                </constraints>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye" translatesAutoresizingMaskIntoConstraints="NO" id="Bv4-sh-Lsh">
+                                <rect key="frame" x="173" y="639" width="28" height="20"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="برای اطمینان خاطر حداقل ۲ نفر دیگر را اضافه کنید" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-jG-HTj">
+                                <rect key="frame" x="38.5" y="611.5" width="297" height="23.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مشاهده لیست آشنایان" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bob-hc-8D4">
+                                <rect key="frame" x="95" y="572" width="184.5" height="31.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="افزودن فامیل و دوستان نزدیک" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDD-lD-hz1">
+                                <rect key="frame" x="66" y="423.5" width="242.5" height="31.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="افزودن کسانی که شما برایشان مهم هستید" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvs-VI-uMQ">
+                                <rect key="frame" x="61.5" y="462.5" width="252" height="23.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="nhx-Al-QMO">
+                                <rect key="frame" x="47.5" y="64" width="280" height="120"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hurt.png" translatesAutoresizingMaskIntoConstraints="NO" id="mfl-kr-XnI">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="cVk-jN-Vmb"/>
+                                            <constraint firstAttribute="width" constant="120" id="vyB-EZ-kYn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="good.png" translatesAutoresizingMaskIntoConstraints="NO" id="ukH-mS-K1u">
+                                        <rect key="frame" x="160" y="0.0" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="9K9-D9-xgy"/>
+                                            <constraint firstAttribute="width" constant="120" id="jHT-a1-CuI"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bob-hc-8D4" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="4oB-77-y99"/>
+                            <constraint firstItem="pvs-VI-uMQ" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="79t-TJ-vy5"/>
+                            <constraint firstItem="6ke-vb-MmP" firstAttribute="top" secondItem="nhx-Al-QMO" secondAttribute="bottom" constant="40" id="7kl-Bj-VwR"/>
+                            <constraint firstItem="pvs-VI-uMQ" firstAttribute="top" secondItem="wDD-lD-hz1" secondAttribute="bottom" constant="8" id="Egq-Ns-gk8"/>
+                            <constraint firstItem="Bv4-sh-Lsh" firstAttribute="top" secondItem="N8B-jG-HTj" secondAttribute="bottom" constant="4" id="MI0-hF-hAV"/>
+                            <constraint firstItem="N8B-jG-HTj" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="UJc-y0-oVb"/>
+                            <constraint firstItem="Bv4-sh-Lsh" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="hXb-VP-zzH"/>
+                            <constraint firstItem="nhx-Al-QMO" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="igN-Ey-wG1"/>
+                            <constraint firstItem="N8B-jG-HTj" firstAttribute="top" secondItem="bob-hc-8D4" secondAttribute="bottom" constant="8" id="koN-Hc-WZy"/>
+                            <constraint firstAttribute="bottom" secondItem="Bv4-sh-Lsh" secondAttribute="bottom" constant="8" id="mTS-K5-0yP"/>
+                            <constraint firstItem="wDD-lD-hz1" firstAttribute="top" secondItem="6ke-vb-MmP" secondAttribute="bottom" constant="20" id="ogZ-ea-1PH"/>
+                            <constraint firstItem="6ke-vb-MmP" firstAttribute="centerY" secondItem="nPS-7n-kLP" secondAttribute="centerY" constant="-20" id="s8Z-C5-DUx"/>
+                            <constraint firstItem="wDD-lD-hz1" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="yO3-zv-VHv"/>
+                            <constraint firstItem="6ke-vb-MmP" firstAttribute="centerX" secondItem="nPS-7n-kLP" secondAttribute="centerX" id="zt2-5m-Kpf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="actionContainer" destination="nhx-Al-QMO" id="Qnr-nW-zwI"/>
+                        <outlet property="closeFriendHintLabel" destination="N8B-jG-HTj" id="CWV-yb-gIv"/>
+                        <outlet property="closeFriendListLabel" destination="bob-hc-8D4" id="UW1-tT-QRx"/>
+                        <outlet property="fineImage" destination="ukH-mS-K1u" id="aLJ-Y5-gNz"/>
+                        <outlet property="hurtImage" destination="mfl-kr-XnI" id="ABv-Wf-ADH"/>
+                        <outlet property="mainSubtitleLabel" destination="pvs-VI-uMQ" id="36Z-9y-Xsx"/>
+                        <outlet property="mainTitleLabel" destination="wDD-lD-hz1" id="beB-s4-rvc"/>
+                        <outlet property="mainView" destination="nPS-7n-kLP" id="cPj-E5-SkE"/>
+                        <outlet property="plusButton" destination="6ke-vb-MmP" id="ezw-M7-3Mn"/>
+                        <outlet property="viewImage" destination="Bv4-sh-Lsh" id="Zpw-QZ-eKs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5q-DK-e1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1780" y="37.331334332833585"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="F0G-71-TXF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="khd-SQ-pXh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mPT-Mv-FEq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="5vI-ip-Wbi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hqx-6U-UOa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="eye" width="28" height="20"/>
+        <image name="good.png" width="116" height="116"/>
+        <image name="hurt.png" width="116" height="116"/>
+        <image name="logo.png" width="500" height="461"/>
+        <image name="plus.png" width="52" height="52"/>
+    </resources>
 </document>
