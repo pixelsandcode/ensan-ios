@@ -30,4 +30,24 @@ class UserInfo {
 			return [:] as! [String: String]
 		}
 	}
+	
+	static func setUsername(_ value: String) {
+		UserDefaults.standard.set(value, forKey: UserDefaultTag.username)
+	}
+	
+	static func getUsername() -> String? {
+		return UserDefaults.standard.string(forKey: UserDefaultTag.username)
+	}
+	
+	static func setMobile(_ value: String) {
+		UserDefaults.standard.set(value, forKey: UserDefaultTag.mobile)
+	}
+	
+	static func getMobile() -> String? {
+		return UserDefaults.standard.string(forKey: UserDefaultTag.mobile)
+	}
+	
+	static func isUser() -> Bool {
+		return getMobile() != nil && getUsername() != nil
+	}
 }

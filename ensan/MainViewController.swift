@@ -23,6 +23,8 @@ class MainViewController: UIViewController {
 	@IBOutlet weak var fineImage: UIImageView!
 	@IBOutlet weak var actionContainer: UIStackView!
 	
+	var pickedContacts: [String: String] = [:]
+	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,10 +37,6 @@ class MainViewController: UIViewController {
 	
 	// MARK: - Actions
 	func plusTapped() {
-//		if (MFMessageComposeViewController.canSendText()) {
-//			let messageComposeVC = configuredMessageComposeViewController()
-//			present(messageComposeVC, animated: true, completion: nil)
-//		}
 		self.selectContact()
 	}
 	
@@ -49,6 +47,11 @@ class MainViewController: UIViewController {
 		messageComposeVC.recipients = phoneNumbers
 		messageComposeVC.body = "\(mainStrings.addGuardianText) \(mainStrings.appLink)"
 		return messageComposeVC
+	}
+	
+	func sendMessage(_ numbers: [String]) {
+		let messageComposeVC = self.configuredMessageComposeViewController(numbers)
+		self.present(messageComposeVC, animated: true, completion: nil)
 	}
 	
 	// MARK: - Contacts
@@ -98,7 +101,7 @@ class MainViewController: UIViewController {
 	
 	func showAlreadyAddedAlert(_ number: String) {
 		let message = "\(mainStrings.guardianAlreadyAdded): \(number)"
-		self.alertWithTitle(self, title: "خطا!", message: message)
+		self.alertWithTitle(self, title: mainStrings.error, message: message)
 	}
 	
 	func alertWithTitle(_ viewController: UIViewController, title: String!, message: String) {
@@ -125,10 +128,21 @@ class MainViewController: UIViewController {
 //MARK: - MFMessageComposerDelegate Method
 extension MainViewController: MFMessageComposeViewControllerDelegate {
 	func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-		controller.dismiss(animated: true) {
-			finished in
-			
-			self.handleByGuardians()
+		if result == MessageComposeResult.sent {
+			controller.dismiss(animated: true) {
+				finished in
+				
+				var guardians = UserInfo.getGuardians()
+				guardians.update(other: self.pickedContacts)
+				UserInfo.setGuardians(guardians)
+				self.handleByGuardians()
+			}
+		} else {
+			controller.dismiss(animated: true) {
+				finished in
+				
+				self.alertWithTitle(self, title: mainStrings.error, message: mainStrings.notSent)
+			}
 		}
 	}
 }
@@ -136,8 +150,8 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 //MARK: - CNContactPickerDelegate Method
 extension MainViewController: CNContactPickerDelegate {
 	func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
-		var pickedContacts: [String: String] = [:]
 		
+		self.pickedContacts = [:]
 		for item in contacts {
 			pickedContacts.updateValue((item.phoneNumbers.first?.value.stringValue)!, forKey: item.givenName)
 			print((item.phoneNumbers.first?.value.stringValue)!)
@@ -145,7 +159,7 @@ extension MainViewController: CNContactPickerDelegate {
 		}
 		
 		print(pickedContacts.debugDescription)
-		var guardians = UserInfo.getGuardians()
+		let guardians = UserInfo.getGuardians()
 		
 		if guardians.count > 0 {
 			for guardian in pickedContacts {
@@ -153,13 +167,8 @@ extension MainViewController: CNContactPickerDelegate {
 					picker.dismiss(animated: true, completion: nil)
 					self.showAlreadyAddedAlert(guardian.value)
 					return
-				} else {
-					guardians.update(other: pickedContacts)
-					UserInfo.setGuardians(guardians)
 				}
 			}
-		} else {
-			UserInfo.setGuardians(pickedContacts)
 		}
 		
 		let phoneNumbers = Array(pickedContacts.values)

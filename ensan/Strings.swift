@@ -23,6 +23,8 @@ struct UserDefaultTag {
 	static let hasSeenIntro = "hasSeenIntro"
 	static let guardiansCount = "guardiansCount"
 	static let guardinas = "guardians"
+	static let username = "username"
+	static let mobile = "mobile"
 }
 
 struct mainStrings {
@@ -33,4 +35,6 @@ struct mainStrings {
 	static let addGuardianText = "سلام لطفا برنامه << انسان >> رو دانلود کن. من شما رو به عنوان سرپرست خودم معرفی کردم تا در صورت زمین لرزه یا بروز حادثه از سلامت خودم با خبرتون کنم."
 	static let appLink = "http://ensanapp.ir"
 	static let guardianAlreadyAdded = "این شماره قبلا اضافه شده"
+	static let error = "خطا!"
+	static let notSent = "پیام ارسال نشد، کسی از شما با خبر نخواهد شد!"
 }
