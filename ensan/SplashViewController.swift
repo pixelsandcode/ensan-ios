@@ -31,7 +31,7 @@ class SplashViewController: UIViewController {
 	
 	// MARK: - Animation
 	func loadAnimation() {
-		let revealingSplashView = RevealingSplashView(iconImage: #imageLiteral(resourceName: "splash_logo.png"),iconInitialSize: CGSize(width: 200, height: 180), backgroundColor: UIColor.white)
+		let revealingSplashView = RevealingSplashView(iconImage: #imageLiteral(resourceName: "splash_logo.png"),iconInitialSize: CGSize(width: 300, height: 280), backgroundColor: UIColor.white)
 		self.view.addSubview(revealingSplashView)
 		
 		revealingSplashView.animationType = SplashAnimationType.heartBeat

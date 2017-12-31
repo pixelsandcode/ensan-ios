@@ -136,6 +136,9 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 				guardians.update(other: self.pickedContacts)
 				UserInfo.setGuardians(guardians)
 				self.handleByGuardians()
+				if !UserInfo.isUser() {
+					// go to sign up
+				}
 			}
 		} else {
 			controller.dismiss(animated: true) {

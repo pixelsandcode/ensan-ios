@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,17 +20,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="oxM-PB-S84">
-                                <rect key="frame" x="87" y="243" width="200" height="180"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="oxM-PB-S84">
+                                <rect key="frame" x="37.5" y="193.5" width="300" height="280"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="JGO-SQ-StJ"/>
-                                    <constraint firstAttribute="width" constant="200" id="Vdc-kV-fVX"/>
+                                    <constraint firstAttribute="width" constant="300" id="98l-pL-4JT"/>
+                                    <constraint firstAttribute="height" constant="280" id="IK5-TS-mPe"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oxM-PB-S84" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jbM-1b-NhW"/>
+                            <constraint firstItem="oxM-PB-S84" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="VAR-9T-G20"/>
                             <constraint firstItem="oxM-PB-S84" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="k8g-Ny-3GC"/>
                         </constraints>
                     </view>
@@ -42,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash_logo.png" width="200" height="185"/>
+        <image name="logo.png" width="500" height="461"/>
     </resources>
 </document>
