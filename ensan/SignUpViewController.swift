@@ -12,6 +12,7 @@ class SignUpViewController: UIViewController {
 	
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var mobileTextField: UITextField!
+	@IBOutlet weak var backContainer: UIStackView!
 	
 	var enteredName = ""
 	var enteredMobile = ""
@@ -21,13 +22,18 @@ class SignUpViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// game is on ...
+		
+		self.backContainer.isUserInteractionEnabled = true
+		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
+		self.backContainer.addGestureRecognizer(backTGR)
 	}
 	
 	// MARK: - Validations
 	func isMobileNumberValid(mobile: String) -> Bool {
-		let PHONE_REGEX = "^((\\+)|(00)|(\\*)|())[0-9]{3,14}((\\#)|())$"
+		let PHONE_REGEX = "^[0-9]{6,14}$"
 		let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
 		let result = phoneTest.evaluate(with: mobile)
+		print(result.description)
 		return result
 	}
 	
@@ -50,12 +56,13 @@ class SignUpViewController: UIViewController {
 	
 	// MARK: - Actions
 	@IBAction func sendTapped(_ sender: Any) {
-		
+		self.signUp()
 	}
 	
 	// MARK: - Internal
 	func signUp() {
 		if !isError() {
+			self.alertWithTitle(self, title: "Bingo", message: "Banekallah")
 			// TODO: Send data to server
 		}
 	}

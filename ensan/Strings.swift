@@ -25,6 +25,7 @@ struct UserDefaultTag {
 	static let guardinas = "guardians"
 	static let username = "username"
 	static let mobile = "mobile"
+	static let hasSent = "hasSent"
 }
 
 struct MainStrings {
@@ -48,4 +49,6 @@ struct ValidationErrors {
 	static let mobileRequired = "شماره موبایل را وارد کنید"
 	static let incorrectMobileFormat = "شماره موبایل معتبر وارد کنید"
 	static let incorrectNameFormat = "نام کامل را وارد کنید"
+	static let sendAlertHint = "برای تمام سرپرستان شما هشدار جدی فرستاده میشود، آیا اطمینان دارید؟"
+	static let alert = "توجه!"
 }

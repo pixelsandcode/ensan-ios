@@ -18,6 +18,14 @@ class UserInfo {
 		return UserDefaults.standard.bool(forKey: UserDefaultTag.hasSeenIntro)
 	}
 	
+	static func setHasSent(value: Bool) {
+		UserDefaults.standard.set(value, forKey: UserDefaultTag.hasSent)
+	}
+	
+	static func hasSent() -> Bool {
+		return UserDefaults.standard.bool(forKey: UserDefaultTag.hasSent)
+	}
+	
 	static func setGuardians(_ dict: [String: String]) {
 		UserDefaults.standard.set(dict, forKey: UserDefaultTag.guardinas)
 	}

@@ -445,6 +445,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backContainer" destination="IB8-ny-bgY" id="7H0-Xp-m86"/>
                         <outlet property="mobileTextField" destination="43t-Tf-wrA" id="boT-3D-OTz"/>
                         <outlet property="nameTextField" destination="hlK-9B-UZA" id="iB7-rt-HWB"/>
                     </connections>

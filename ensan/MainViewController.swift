@@ -42,7 +42,8 @@ class MainViewController: UIViewController {
 	
 	// MARK: - Actions
 	func plusTapped() {
-		self.selectContact()
+		self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
+		//self.selectContact()
 	}
 	
 	func viewGuardianTapped() {
@@ -54,7 +55,13 @@ class MainViewController: UIViewController {
 	}
 	
 	func showHurt() {
-		self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
+		if UserInfo.hasSent() {
+			self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
+		} else {
+			UserInfo.setHasSent(value: true)
+			self.alertWithTitle(self, title: ValidationErrors.alert, message: ValidationErrors.sendAlertHint)
+		}
+		
 	}
 	
 	// MARK: - Message
