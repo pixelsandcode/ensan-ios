@@ -30,8 +30,13 @@ class MainViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Game is on...
-		UserInfo.setGuardians([:])
+		// TODO: Delete after test
 		self.setupButtons()
+		var a : [String: String] = [:]
+		a.updateValue("09125277448", forKey: "Ashkan")
+		a.updateValue("09125277448", forKey: "Keyvan")
+		a.updateValue("09125277448", forKey: "Arash")
+		UserInfo.setGuardians(a)
 		self.handleByGuardians()
 	}
 	
@@ -40,12 +45,24 @@ class MainViewController: UIViewController {
 		self.selectContact()
 	}
 	
+	func viewGuardianTapped() {
+		self.performSegueWithIdentifier(segueIdentifier: .showGuardians, sender: self)
+	}
+	
+	func showFine() {
+		self.performSegueWithIdentifier(segueIdentifier: .showFine, sender: self)
+	}
+	
+	func showHurt() {
+		self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
+	}
+	
 	// MARK: - Message
 	func configuredMessageComposeViewController(_ phoneNumbers: [String]) -> MFMessageComposeViewController {
 		let messageComposeVC = MFMessageComposeViewController()
 		messageComposeVC.messageComposeDelegate = self
 		messageComposeVC.recipients = phoneNumbers
-		messageComposeVC.body = "\(mainStrings.addGuardianText) \(mainStrings.appLink)"
+		messageComposeVC.body = "\(MainStrings.addGuardianText) \(MainStrings.appLink)"
 		return messageComposeVC
 	}
 	
@@ -65,8 +82,25 @@ class MainViewController: UIViewController {
 	func setupButtons() {
 		self.plusButton.isUserInteractionEnabled = true
 		let plusTGR = UITapGestureRecognizer(target: self, action: #selector(self.plusTapped))
-		plusButton.addGestureRecognizer(plusTGR)
+		self.plusButton.addGestureRecognizer(plusTGR)
+		
+		self.viewImage.isUserInteractionEnabled = true
+		let viewTGR = UITapGestureRecognizer(target: self, action: #selector(self.viewGuardianTapped))
+		self.viewImage.addGestureRecognizer(viewTGR)
+		
+		self.fineImage.isUserInteractionEnabled = true
+		let fineTGR = UITapGestureRecognizer(target: self, action: #selector(self.showFine))
+		self.fineImage.addGestureRecognizer(fineTGR)
+		
+		self.hurtImage.isUserInteractionEnabled = true
+		let hurtTGR = UITapGestureRecognizer(target: self, action: #selector(self.showHurt))
+		self.hurtImage.addGestureRecognizer(hurtTGR)
 	}
+	
+	@IBAction func viewAddedGuardiansTapped(_ sender: Any) {
+		self.viewGuardianTapped()
+	}
+	
 	
 	// MARK: - Handle Guardians
 	func handleByGuardians() {
@@ -81,16 +115,16 @@ class MainViewController: UIViewController {
 			self.mainView.backgroundColor = UIColor.dangerRed
 			self.viewImage.isHidden = true
 			self.closeFriendListLabel.isHidden = true
-			self.closeFriendHintLabel.text = mainStrings.dangerFriendListHint
+			self.closeFriendHintLabel.text = MainStrings.dangerFriendListHint
 		case 1:
 			self.mainView.backgroundColor = UIColor.dangerOrange
-			self.closeFriendHintLabel.text = mainStrings.addTwoMore
+			self.closeFriendHintLabel.text = MainStrings.addTwoMore
 		case 2:
 			self.mainView.backgroundColor = UIColor.dangerBlue
-			self.closeFriendHintLabel.text = mainStrings.addOneMore
+			self.closeFriendHintLabel.text = MainStrings.addOneMore
 		case 3:
 			self.mainView.backgroundColor = UIColor.safeGreen
-			self.closeFriendHintLabel.text = mainStrings.threeAdded
+			self.closeFriendHintLabel.text = MainStrings.threeAdded
 			self.mainTitleLabel.isHidden = true
 			self.mainSubtitleLabel.isHidden = true
 			self.actionContainer.isHidden = false
@@ -100,8 +134,8 @@ class MainViewController: UIViewController {
 	}
 	
 	func showAlreadyAddedAlert(_ number: String) {
-		let message = "\(mainStrings.guardianAlreadyAdded): \(number)"
-		self.alertWithTitle(self, title: mainStrings.error, message: message)
+		let message = "\(MainStrings.guardianAlreadyAdded): \(number)"
+		self.alertWithTitle(self, title: MainStrings.error, message: message)
 	}
 	
 	func alertWithTitle(_ viewController: UIViewController, title: String!, message: String) {
@@ -113,16 +147,16 @@ class MainViewController: UIViewController {
 		alert.addAction(action)
 		viewController.present(alert, animated: true, completion:nil)
 	}
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
+}
+
+// MARK: - Navigation
+extension MainViewController: SegueHandlerType {
+	enum SegueIdentifier: String {
+		case showGuardians
+		case showFine
+		case showHurt
+		case showSignUp
 	}
-	*/
 }
 
 //MARK: - MFMessageComposerDelegate Method
@@ -137,14 +171,14 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 				UserInfo.setGuardians(guardians)
 				self.handleByGuardians()
 				if !UserInfo.isUser() {
-					// go to sign up
+					self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
 				}
 			}
 		} else {
 			controller.dismiss(animated: true) {
 				finished in
 				
-				self.alertWithTitle(self, title: mainStrings.error, message: mainStrings.notSent)
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
 			}
 		}
 	}

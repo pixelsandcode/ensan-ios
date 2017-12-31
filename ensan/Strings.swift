@@ -27,7 +27,7 @@ struct UserDefaultTag {
 	static let mobile = "mobile"
 }
 
-struct mainStrings {
+struct MainStrings {
 	static let dangerFriendListHint = "کسی از شما با خبر نخواهد شد"
 	static let addTwoMore = "برای اطمینان خاطر حداقل ۲ نفر دیگر را اضافه کنید"
 	static let addOneMore = "برای اطمینان خاطر حداقل 1 نفر دیگر را اضافه کنید"
@@ -37,4 +37,15 @@ struct mainStrings {
 	static let guardianAlreadyAdded = "این شماره قبلا اضافه شده"
 	static let error = "خطا!"
 	static let notSent = "پیام ارسال نشد، کسی از شما با خبر نخواهد شد!"
+	static let addMoreGuardian = "افزودن سرپرست"
+	static let notifiedFine = "نفر از سلامت شما مطلع شدند"
+	static let notifiedHurt = "نفر از حادثه شما مطلع شدند"
+}
+
+struct ValidationErrors {
+	static let fieldRequired = ""
+	static let nameRequired = "نام کامل را وارد کنید"
+	static let mobileRequired = "شماره موبایل را وارد کنید"
+	static let incorrectMobileFormat = "شماره موبایل معتبر وارد کنید"
+	static let incorrectNameFormat = "نام کامل را وارد کنید"
 }
