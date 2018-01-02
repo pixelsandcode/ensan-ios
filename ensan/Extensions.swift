@@ -27,3 +27,13 @@ extension Dictionary {
 		}
 	}
 }
+
+extension Date {
+	func addDays(_ daysToAdd : Int) -> Date {
+		let secondsInDays : TimeInterval = Double(daysToAdd) * 60 * 60 * 24
+		let dateWithDaysAdded : Date = self.addingTimeInterval(secondsInDays)
+		
+		//Return Result
+		return dateWithDaysAdded
+	}
+}

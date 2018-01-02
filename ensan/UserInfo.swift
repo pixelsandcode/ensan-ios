@@ -10,6 +10,14 @@ import Foundation
 
 class UserInfo {
 	
+	static func setNotificationSchedule(value: Bool) {
+		UserDefaults.standard.set(value, forKey: UserDefaultTag.notificationScheduled)
+	}
+	
+	static func notificationScheduled() -> Bool {
+		return UserDefaults.standard.bool(forKey: UserDefaultTag.notificationScheduled)
+	}
+	
 	static func setIntroSeen(value: Bool) {
 		UserDefaults.standard.set(value, forKey: UserDefaultTag.hasSeenIntro)
 	}
@@ -57,5 +65,13 @@ class UserInfo {
 	
 	static func isUser() -> Bool {
 		return getMobile() != nil && getUsername() != nil
+	}
+	
+	static func setUuids(_ uuids: [String]) {
+		UserDefaults.standard.set(uuids, forKey: UserDefaultTag.uuids)
+	}
+	
+	static func getUuids() -> [String] {
+		return UserDefaults.standard.array(forKey: UserDefaultTag.uuids) as! [String]
 	}
 }

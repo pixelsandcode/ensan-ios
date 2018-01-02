@@ -32,6 +32,12 @@ class MainViewController: UIViewController {
 		// Game is on...
 		self.setupButtons()
 		self.handleByGuardians()
+		let guardiansCount = UserInfo.getUuids().count
+		UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
+			self.setupNotification()
+		}
+		//self.setupNotification()
 		//UserInfo.setGuardians([:])
 	}
 	
@@ -40,6 +46,54 @@ class MainViewController: UIViewController {
 		if !self.pickedContact.sent {
 			self.sendMessage([self.pickedContact.mobile])
 			self.pickedContact.sent = true
+		}
+	}
+	
+	// MARK: Local notification
+	func setupNotification() {
+		let firstNotification = UILocalNotification()
+		firstNotification.alertBody = MainStrings.localNotificationAlert
+		firstNotification.alertAction = MainStrings.ok
+		let firstDate = Date().addDays(1)
+		firstNotification.fireDate = firstDate
+		firstNotification.soundName = UILocalNotificationDefaultSoundName
+		let firstUuid = UUID().uuidString
+		firstNotification.userInfo = ["title": ValidationErrors.alert, "UUID": firstUuid]
+		UIApplication.shared.scheduleLocalNotification(firstNotification)
+		
+		let secondNotification = UILocalNotification()
+		secondNotification.alertBody = MainStrings.localNotificationAlert
+		secondNotification.alertAction = MainStrings.ok
+		let secondDate = Date().addDays(3)
+		secondNotification.soundName = UILocalNotificationDefaultSoundName
+		secondNotification.fireDate = secondDate
+		let secondUuid = UUID().uuidString
+		secondNotification.userInfo = ["title": ValidationErrors.alert, "UUID": secondUuid]
+		UIApplication.shared.scheduleLocalNotification(secondNotification)
+		
+		let thirdNotification = UILocalNotification()
+		thirdNotification.alertBody = MainStrings.localNotificationAlert
+		thirdNotification.alertAction = MainStrings.ok
+		let thirdDate = Date().addDays(7)
+		thirdNotification.soundName = UILocalNotificationDefaultSoundName
+		thirdNotification.fireDate = thirdDate
+		let thirdUuid = UUID().uuidString
+		thirdNotification.userInfo = ["title": ValidationErrors.alert, "UUID": thirdUuid]
+		UIApplication.shared.scheduleLocalNotification(thirdNotification)
+		
+		UserInfo.setUuids([firstUuid, secondUuid, thirdUuid])
+		UserInfo.setNotificationSchedule(value: true)
+	}
+	
+	func removeNotifications(uuid: String) {
+		let scheduledNotifications: [UILocalNotification]? = UIApplication.shared.scheduledLocalNotifications
+		guard scheduledNotifications != nil else {return} // Nothing to remove, so return
+		
+		for notification in scheduledNotifications! { // loop through notifications...
+			if (notification.userInfo!["UUID"] as! String == uuid) {
+				UIApplication.shared.cancelLocalNotification(notification) // there should be a maximum of one match on UUID
+				break
+			}
 		}
 	}
 	
@@ -178,6 +232,15 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 				guardians.updateValue(self.pickedContact.mobile, forKey: self.pickedContact.name)
 				UserInfo.setGuardians(guardians)
 				self.handleByGuardians()
+				
+				let uuids = UserInfo.getUuids()
+				if uuids.count > 0 {
+					for item in uuids {
+						self.removeNotifications(uuid: item)
+						UserInfo.setUuids([])
+					}
+				}
+				
 				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
 			}
 		} else {

@@ -26,6 +26,8 @@ struct UserDefaultTag {
 	static let username = "username"
 	static let mobile = "mobile"
 	static let hasSent = "hasSent"
+	static let notificationScheduled = "notificationScheduled"
+	static let uuids = "uuids"
 }
 
 struct MainStrings {
@@ -43,6 +45,8 @@ struct MainStrings {
 	static let notifiedHurt = "نفر از حادثه شما مطلع شدند"
 	static let success = "موفق"
 	static let invitationSent = "پیام دعوت ارسال شد"
+	static let localNotificationAlert = "شما سرپرستی ندارید و در خطر هستید، سرپرست جدید اضافه کنید."
+	static let ok = "باشه"
 }
 
 struct ValidationErrors {
