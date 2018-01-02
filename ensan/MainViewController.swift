@@ -23,27 +23,29 @@ class MainViewController: UIViewController {
 	@IBOutlet weak var fineImage: UIImageView!
 	@IBOutlet weak var actionContainer: UIStackView!
 	
-	var pickedContacts: [String: String] = [:]
+	var pickedContact: Guardian = Guardian()
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Game is on...
-		// TODO: Delete after test
 		self.setupButtons()
-		var a : [String: String] = [:]
-		a.updateValue("09125277448", forKey: "Ashkan")
-		a.updateValue("09125277448", forKey: "Keyvan")
-		a.updateValue("09125277448", forKey: "Arash")
-		UserInfo.setGuardians(a)
 		self.handleByGuardians()
+		//UserInfo.setGuardians([:])
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		if !self.pickedContact.sent {
+			self.sendMessage([self.pickedContact.mobile])
+			self.pickedContact.sent = true
+		}
 	}
 	
 	// MARK: - Actions
 	func plusTapped() {
-		self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
-		//self.selectContact()
+		self.selectContact()
 	}
 	
 	func viewGuardianTapped() {
@@ -61,7 +63,6 @@ class MainViewController: UIViewController {
 			UserInfo.setHasSent(value: true)
 			self.alertWithTitle(self, title: ValidationErrors.alert, message: ValidationErrors.sendAlertHint)
 		}
-		
 	}
 	
 	// MARK: - Message
@@ -174,12 +175,10 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 				finished in
 				
 				var guardians = UserInfo.getGuardians()
-				guardians.update(other: self.pickedContacts)
+				guardians.updateValue(self.pickedContact.mobile, forKey: self.pickedContact.name)
 				UserInfo.setGuardians(guardians)
 				self.handleByGuardians()
-				if !UserInfo.isUser() {
-					self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
-				}
+				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
 			}
 		} else {
 			controller.dismiss(animated: true) {
@@ -193,36 +192,70 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 
 //MARK: - CNContactPickerDelegate Method
 extension MainViewController: CNContactPickerDelegate {
-	func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+	func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+		self.pickedContact = Guardian()
+		self.pickedContact.name = contact.givenName
+		self.pickedContact.mobile = (contact.phoneNumbers.first?.value.stringValue)!
 		
-		self.pickedContacts = [:]
-		for item in contacts {
-			pickedContacts.updateValue((item.phoneNumbers.first?.value.stringValue)!, forKey: item.givenName)
-			print((item.phoneNumbers.first?.value.stringValue)!)
-			print(item.givenName)
-		}
-		
-		print(pickedContacts.debugDescription)
 		let guardians = UserInfo.getGuardians()
 		
 		if guardians.count > 0 {
-			for guardian in pickedContacts {
-				if guardians.values.contains(guardian.value) {
-					picker.dismiss(animated: true, completion: nil)
-					self.showAlreadyAddedAlert(guardian.value)
-					return
-				}
+			if guardians.values.contains(pickedContact.mobile) {
+				picker.dismiss(animated: true, completion: nil)
+				self.showAlreadyAddedAlert(self.pickedContact.mobile)
+				return
 			}
 		}
 		
-		let phoneNumbers = Array(pickedContacts.values)
+		let phoneNumbers = [pickedContact.mobile]
 		let messageComposeVC = self.configuredMessageComposeViewController(phoneNumbers)
+		
 		picker.dismiss(animated: true) {
 			completed in
-			
-			self.present(messageComposeVC, animated: true, completion: nil)
+			if UserInfo.isUser() {
+				self.present(messageComposeVC, animated: true, completion: nil)
+			} else {
+				self.pickedContact.sent = false
+				self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
+			}
 		}
 	}
+	
+	//	func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+	//
+	//		self.pickedContacts = [:]
+	//		self.messageComposeVC = nil
+	//		for item in contacts {
+	//			pickedContacts.updateValue((item.phoneNumbers.first?.value.stringValue)!, forKey: item.givenName)
+	//			print((item.phoneNumbers.first?.value.stringValue)!)
+	//			print(item.givenName)
+	//		}
+	//
+	//		print(pickedContacts.debugDescription)
+	//		let guardians = UserInfo.getGuardians()
+	//
+	//		if guardians.count > 0 {
+	//			for guardian in pickedContacts {
+	//				if guardians.values.contains(guardian.value) {
+	//					picker.dismiss(animated: true, completion: nil)
+	//					self.showAlreadyAddedAlert(guardian.value)
+	//					return
+	//				}
+	//			}
+	//		}
+	//
+	//		let phoneNumbers = Array(pickedContacts.values)
+	//		let messageComposeVC = self.configuredMessageComposeViewController(phoneNumbers)
+	//		if UserInfo.isUser() {
+	//			picker.dismiss(animated: true) {
+	//				completed in
+	//
+	//				self.present(messageComposeVC, animated: true, completion: nil)
+	//			}
+	//		} else {
+	//			performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
+	//		}
+	//	}
 	
 	func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
 		print("contact picker cancelled")

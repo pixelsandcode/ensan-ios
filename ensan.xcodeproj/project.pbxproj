@@ -35,6 +35,7 @@
 		468A60C41FF7B5A200157FBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C21FF7B5A200157FBD /* Main.storyboard */; };
 		468A60C61FF7B5A200157FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C51FF7B5A200157FBD /* Assets.xcassets */; };
 		468A60C91FF7B5A200157FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C71FF7B5A200157FBD /* LaunchScreen.storyboard */; };
+		46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E36BB91FFBDB5400368048 /* Guardian.swift */; };
 		7FEB510D315A4F2518D3E250 /* Pods_ensan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708281F39EEB3EA452C9F708 /* Pods_ensan.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		468A60C51FF7B5A200157FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		468A60C81FF7B5A200157FBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		468A60CA1FF7B5A200157FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46E36BB91FFBDB5400368048 /* Guardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian.swift; sourceTree = "<group>"; };
 		591FF83BC23EC695B26D48A6 /* Pods-ensan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.release.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.release.xcconfig"; sourceTree = "<group>"; };
 		6ABED30E6C6FA2E27DE137C6 /* Pods-ensan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.debug.xcconfig"; sourceTree = "<group>"; };
 		708281F39EEB3EA452C9F708 /* Pods_ensan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ensan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 		468A60BD1FF7B5A200157FBD /* ensan */ = {
 			isa = PBXGroup;
 			children = (
+				46E36BB81FFBDB2B00368048 /* Models */,
 				461602F81FF7BA96003721DB /* Controllers */,
 				468A60C21FF7B5A200157FBD /* Main.storyboard */,
 				461602F91FF7BAA0003721DB /* Resources */,
@@ -170,6 +173,14 @@
 				461603111FF7D805003721DB /* UserInfo.swift */,
 			);
 			path = ensan;
+			sourceTree = "<group>";
+		};
+		46E36BB81FFBDB2B00368048 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				46E36BB91FFBDB5400368048 /* Guardian.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		A16CF07E2FB47717965F7AFE /* Pods */ = {
@@ -329,6 +340,7 @@
 				461603201FF90073003721DB /* GuardianViewController.swift in Sources */,
 				461603241FF91C74003721DB /* FineViewController.swift in Sources */,
 				461603161FF7DBD8003721DB /* SegueHandlerType.swift in Sources */,
+				46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */,
 				461603101FF7D539003721DB /* Colors.swift in Sources */,
 				4616030C1FF7CB29003721DB /* Strings.swift in Sources */,
 				461602F71FF7B985003721DB /* SplashViewController.swift in Sources */,

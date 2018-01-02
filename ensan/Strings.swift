@@ -41,6 +41,8 @@ struct MainStrings {
 	static let addMoreGuardian = "افزودن سرپرست"
 	static let notifiedFine = "نفر از سلامت شما مطلع شدند"
 	static let notifiedHurt = "نفر از حادثه شما مطلع شدند"
+	static let success = "موفق"
+	static let invitationSent = "پیام دعوت ارسال شد"
 }
 
 struct ValidationErrors {

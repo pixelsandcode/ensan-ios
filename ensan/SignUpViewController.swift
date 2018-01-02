@@ -62,8 +62,9 @@ class SignUpViewController: UIViewController {
 	// MARK: - Internal
 	func signUp() {
 		if !isError() {
-			self.alertWithTitle(self, title: "Bingo", message: "Banekallah")
+			//self.alertWithTitle(self, title: "Bingo", message: "Banekallah")
 			// TODO: Send data to server
+			self.back()
 		}
 	}
 	
