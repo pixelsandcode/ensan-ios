@@ -28,6 +28,7 @@ struct UserDefaultTag {
 	static let hasSent = "hasSent"
 	static let notificationScheduled = "notificationScheduled"
 	static let uuids = "uuids"
+	static let token = "token"
 }
 
 struct MainStrings {

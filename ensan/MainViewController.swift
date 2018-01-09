@@ -37,6 +37,7 @@ class MainViewController: UIViewController {
 		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
 			self.setupNotification()
 		}
+		
 		//self.setupNotification()
 		//UserInfo.setGuardians([:])
 	}

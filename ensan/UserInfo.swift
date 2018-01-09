@@ -74,4 +74,12 @@ class UserInfo {
 	static func getUuids() -> [String] {
 		return UserDefaults.standard.array(forKey: UserDefaultTag.uuids) as! [String]
 	}
+	
+	static func setToken(token: String) {
+		UserDefaults.standard.setValue(token, forKey: UserDefaultTag.token)
+	}
+	
+	static func getToken() -> String? {
+		return UserDefaults.standard.object(forKey: UserDefaultTag.token) as? String
+	}
 }

@@ -4,5 +4,6 @@ target 'ensan' do
   use_frameworks!
 
 	pod 'RevealingSplashView'
+	pod 'Alamofire', '~> 4.5'
 
 end
