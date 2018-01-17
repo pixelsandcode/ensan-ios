@@ -159,6 +159,10 @@ class MainViewController: UIViewController {
 		self.hurtImage.isUserInteractionEnabled = true
 		let hurtTGR = UITapGestureRecognizer(target: self, action: #selector(self.showHurt))
 		self.hurtImage.addGestureRecognizer(hurtTGR)
+		
+		self.closeFriendListLabel.isUserInteractionEnabled = true
+		let showTGR = UITapGestureRecognizer(target: self, action: #selector(self.viewGuardianTapped))
+		self.closeFriendListLabel.addGestureRecognizer(showTGR)
 	}
 	
 	@IBAction func viewAddedGuardiansTapped(_ sender: Any) {

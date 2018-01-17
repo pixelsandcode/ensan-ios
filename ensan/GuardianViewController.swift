@@ -34,6 +34,7 @@ class GuardianViewController: UIViewController {
 		self.backContainer.isUserInteractionEnabled = true
 		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
 		self.backContainer.addGestureRecognizer(backTGR)
+		self.pickedContact = Guardian()
 	}
 	
 	func back() {
@@ -88,6 +89,10 @@ class GuardianViewController: UIViewController {
 				if let guardians = response.result.value {
 					self.guardians = guardians
 					self.tableView.reloadData()
+					let pendings = guardians.filter({$0.state == "pending"})
+					if pendings.count > 0 {
+						self.alertIfPending()
+					}
 				}
 			}
 		}
@@ -113,9 +118,13 @@ class GuardianViewController: UIViewController {
 					}
 				}
 			} else {
-				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.messageNotSent)
 			}
 		}
+	}
+	
+	func alertIfPending() {
+		self.alertWithTitle(self, title: MainStrings.alert, message: "برای ارسال دوباره دعوت روی اسم شخص کلیک کنید")
 	}
 }
 
@@ -124,6 +133,23 @@ extension GuardianViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.row == self.guardians.count {
 			self.selectContact()
+			return
+		}
+		
+		let position = indexPath.row
+		let obj = self.guardians[position]
+		if obj.state == "pending" {
+			let alert = UIAlertController(title: "ارسال مجدد", message: "آیا میخواهید مجددا دعوت کنید؟", preferredStyle: .alert)
+			let sendAction = UIAlertAction(title: "بله", style: .default) {
+				action in
+				
+				self.sendMessage([obj.mobile])
+			}
+			let cancelAction = UIAlertAction(title: MainStrings.cancel, style: .cancel)
+			alert.addAction(sendAction)
+			alert.addAction(cancelAction)
+			self.present(alert, animated: true, completion: nil)
+			
 		}
 	}
 }
@@ -167,13 +193,17 @@ extension GuardianViewController: MFMessageComposeViewControllerDelegate {
 			controller.dismiss(animated: true) {
 				finished in
 				
-				self.sendGuardian()
+				if !self.pickedContact.mobile.isEmpty {
+					self.sendGuardian()
+				} else {
+					self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
+				}
 			}
 		} else {
 			controller.dismiss(animated: true) {
 				finished in
 				
-				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.messageNotSent)
 			}
 		}
 	}
@@ -184,7 +214,13 @@ extension GuardianViewController: CNContactPickerDelegate {
 	func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
 		self.pickedContact = Guardian()
 		self.pickedContact.name = contact.givenName
-		self.pickedContact.mobile = (contact.phoneNumbers.first?.value.stringValue)!
+		if let mobile = contact.phoneNumbers.first?.value.stringValue {
+			let fixedMobile = mobile.replacingOccurrences(of: " ", with: "")
+			self.pickedContact.mobile = fixedMobile
+		} else {
+			self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.badNumber)
+			return
+		}
 		
 		let guardians = UserInfo.getGuardians()
 		

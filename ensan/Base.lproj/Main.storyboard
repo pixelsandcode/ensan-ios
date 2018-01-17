@@ -265,9 +265,6 @@
                                 <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="8cv-2L-nvG" appends="YES" id="rIi-7z-WAd"/>
-                                </connections>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="افزودن فامیل و دوستان نزدیک" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDD-lD-hz1">
                                 <rect key="frame" x="66.5" y="423.5" width="242.5" height="31.5"/>
@@ -337,11 +334,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5q-DK-e1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="8cv-2L-nvG">
-                    <connections>
-                        <action selector="viewAddedGuardiansTapped:" destination="oF1-zJ-Jqv" id="Wzl-Sj-ocA"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1780" y="37.331334332833585"/>
         </scene>
