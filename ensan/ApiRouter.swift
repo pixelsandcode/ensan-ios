@@ -158,11 +158,20 @@ extension DataRequest {
 struct ApiRouter {
 	enum Router: URLRequestConvertible {
 		case login()
+		case signup(name: String, mobile: String)
+		case addGuardian(name: String, mobile: String)
+		case getGuardians()
 		
 		var method: Alamofire.HTTPMethod {
 			switch self {
 			case .login:
 				return .post
+			case .signup:
+				return .post
+			case .addGuardian:
+				return .post
+			case .getGuardians:
+				return .get
 			}
 		}
 		
@@ -170,11 +179,20 @@ struct ApiRouter {
 			let result: (path: String, parameters: [String: AnyObject]?) = {
 				switch self {
 				case .login():
-					return ("/users/login", nil)
+					let params = ["auth": UserInfo.getUserAuth(), "mobile": UserInfo.getMobile()]
+					return ("/user/login", params as [String : AnyObject])
+				case .signup(let name, let mobile):
+					let params = ["name": name, "mobile": mobile]
+					return ("user/signup", params as [String : AnyObject])
+				case .addGuardian(let name, let mobile):
+					let params = ["name": name, "mobile": mobile]
+					return ("user/guardians", params as [String : AnyObject])
+				case .getGuardians():
+					return ("user/guardians", nil)
 				}
 			}()
 			
-			let url = URL(string: "192.168.0.109:3100")!
+			let url = URL(string: "http://api.ensanapp.ir/v1")!
 			//let url = URL(string: Constants.ApiConstants.baseURLString)!
 			var urlRequest = URLRequest(url: url.appendingPathComponent(result.path))
 			urlRequest.httpMethod = method.rawValue

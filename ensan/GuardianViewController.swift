@@ -9,16 +9,15 @@
 import UIKit
 import MessageUI
 import ContactsUI
+import Alamofire
 
 class GuardianViewController: UIViewController {
 	
 	@IBOutlet weak var backContainer: UIStackView!
 	@IBOutlet weak var tableView: UITableView!
 	
-	var pickedContacts: [String: String] = [:]
-	var guardians = UserInfo.getGuardians()
-	var names: [String] = []
-	var mobiles: [String] = []
+	var pickedContact: Guardian = Guardian()
+	var guardians: [Guardian] = []
 	
 	let cellIdentifier = "GuardianCell"
 	
@@ -29,8 +28,8 @@ class GuardianViewController: UIViewController {
 		// Game is on ...
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		self.mobiles = Array(self.guardians.values)
-		self.names = Array(self.guardians.keys)
+		
+		self.getGuardians()
 		
 		self.backContainer.isUserInteractionEnabled = true
 		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
@@ -80,6 +79,44 @@ class GuardianViewController: UIViewController {
 		alert.addAction(action)
 		viewController.present(alert, animated: true, completion:nil)
 	}
+	
+	func getGuardians() {
+		Alamofire.request(ApiRouter.Router.getGuardians()).log(.verbose).validate().responseCollection() {
+			(response: DataResponse<[Guardian]>) in
+			
+			if response.result.isSuccess {
+				if let guardians = response.result.value {
+					self.guardians = guardians
+					self.tableView.reloadData()
+				}
+			}
+		}
+	}
+	
+	func sendGuardian() {
+		Alamofire.request(ApiRouter.Router.addGuardian(name: self.pickedContact.name, mobile: self.pickedContact.mobile)).log().validate().responseJSON() {
+			response in
+			
+			if response.result.isSuccess {
+				self.guardians = UserInfo.getGuardians()
+				self.guardians.append(self.pickedContact)
+				UserInfo.setGuardians(self.guardians)
+				
+				self.tableView.reloadData()
+				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
+			} else if response.response?.statusCode == 401 {
+				Helpers.login() {
+					success in
+					
+					if success {
+						self.sendGuardian()
+					}
+				}
+			} else {
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
+			}
+		}
+	}
 }
 
 // MARK: - TableView DataSource and Delegate
@@ -104,12 +141,19 @@ extension GuardianViewController: UITableViewDataSource {
 		if position == lastIndex {
 			cell.statusImageView.image = #imageLiteral(resourceName: "plus.png")
 			cell.nameLabel.text = MainStrings.addMoreGuardian
-			cell.mobileLabel.removeFromSuperview()
-			cell.statusLabel.removeFromSuperview()
-		} else {
-			cell.nameLabel.text = self.names[position]
-			cell.mobileLabel.text = self.mobiles[position]
+			cell.mobileLabel.isHidden = true
 			cell.statusLabel.isHidden = true
+		} else {
+			let obj = self.guardians[position]
+			cell.nameLabel.text = obj.name
+			cell.mobileLabel.text = obj.mobile
+			if obj.state == "pending" {
+				cell.statusLabel.isHidden = false
+				cell.statusImageView.image = #imageLiteral(resourceName: "alert.png")
+			} else {
+				cell.statusLabel.isHidden = true
+				cell.statusImageView.image = #imageLiteral(resourceName: "guardian_accepted.png")
+			}
 		}
 		
 		return cell
@@ -123,11 +167,7 @@ extension GuardianViewController: MFMessageComposeViewControllerDelegate {
 			controller.dismiss(animated: true) {
 				finished in
 				
-				var guardians = UserInfo.getGuardians()
-				guardians.update(other: self.pickedContacts)
-				UserInfo.setGuardians(guardians)
-				self.guardians = guardians
-				self.tableView.reloadData()
+				self.sendGuardian()
 			}
 		} else {
 			controller.dismiss(animated: true) {
@@ -141,34 +181,34 @@ extension GuardianViewController: MFMessageComposeViewControllerDelegate {
 
 //MARK: - CNContactPickerDelegate Method
 extension GuardianViewController: CNContactPickerDelegate {
-	func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+	func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+		self.pickedContact = Guardian()
+		self.pickedContact.name = contact.givenName
+		self.pickedContact.mobile = (contact.phoneNumbers.first?.value.stringValue)!
 		
-		self.pickedContacts = [:]
-		for item in contacts {
-			pickedContacts.updateValue((item.phoneNumbers.first?.value.stringValue)!, forKey: item.givenName)
-			print((item.phoneNumbers.first?.value.stringValue)!)
-			print(item.givenName)
-		}
-		
-		print(pickedContacts.debugDescription)
 		let guardians = UserInfo.getGuardians()
 		
 		if guardians.count > 0 {
-			for guardian in pickedContacts {
-				if guardians.values.contains(guardian.value) {
+			for guardian in guardians {
+				if guardian.mobile == pickedContact.mobile {
 					picker.dismiss(animated: true, completion: nil)
-					self.showAlreadyAddedAlert(guardian.value)
+					self.showAlreadyAddedAlert(self.pickedContact.mobile)
 					return
 				}
 			}
 		}
 		
-		let phoneNumbers = Array(pickedContacts.values)
+		let phoneNumbers = [pickedContact.mobile]
 		let messageComposeVC = self.configuredMessageComposeViewController(phoneNumbers)
+		
 		picker.dismiss(animated: true) {
 			completed in
-			
-			self.present(messageComposeVC, animated: true, completion: nil)
+			if UserInfo.isUser() {
+				self.present(messageComposeVC, animated: true, completion: nil)
+			} else {
+				self.pickedContact.sent = false
+				self.back()
+			}
 		}
 	}
 	

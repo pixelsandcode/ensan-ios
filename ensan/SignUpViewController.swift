@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SignUpViewController: UIViewController {
 	
@@ -62,9 +63,24 @@ class SignUpViewController: UIViewController {
 	// MARK: - Internal
 	func signUp() {
 		if !isError() {
-			//self.alertWithTitle(self, title: "Bingo", message: "Banekallah")
-			// TODO: Send data to server
-			self.back()
+			if let name = UserInfo.getUsername(), let mobile = UserInfo.getMobile() {
+				Alamofire.request(ApiRouter.Router.signup(name: name, mobile: mobile)).log().validate().responseObject() {
+					
+					(response: DataResponse<User>) in
+					
+					let _ = Helpers.getAndSaveToken(response: response.response!)
+					let user = response.result.value
+					if let user = user {
+						User.saveUser(user)
+					}
+					
+					self.back()
+					print(user.debugDescription)
+				}
+			} else {
+				// TODO: show error
+			}
+			
 		}
 	}
 	

@@ -133,8 +133,8 @@
                                     <outletCollection property="gestureRecognizers" destination="KRd-4V-ZNc" appends="YES" id="PDr-0z-7Xz"/>
                                 </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پیغام کمک شما ارسال شد" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaK-jD-Okp">
-                                <rect key="frame" x="85.5" y="413" width="204" height="31.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پیغام سلامت شما ارسال شد" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaK-jD-Okp">
+                                <rect key="frame" x="77" y="413" width="221.5" height="31.5"/>
                                 <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

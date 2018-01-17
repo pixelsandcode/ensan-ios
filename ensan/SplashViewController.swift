@@ -25,6 +25,15 @@ class SplashViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Game is on ...
+		Helpers.login() {
+			success in
+			if success {
+				print("logged in")
+			} else {
+				print("can't login")
+			}
+		}
+		
 		self.loadAnimation()
 	}
 	

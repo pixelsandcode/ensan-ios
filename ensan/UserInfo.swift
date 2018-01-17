@@ -34,17 +34,23 @@ class UserInfo {
 		return UserDefaults.standard.bool(forKey: UserDefaultTag.hasSent)
 	}
 	
-	static func setGuardians(_ dict: [String: String]) {
-		UserDefaults.standard.set(dict, forKey: UserDefaultTag.guardinas)
+	static func setGuardians(_ guardians: [Guardian]) {
+		let guardiansData = NSKeyedArchiver.archivedData(withRootObject: guardians)
+		UserDefaults.standard.set(guardiansData, forKey: UserDefaultTag.guardinas)
 	}
 	
-	static func getGuardians() -> [String: String] {
-		let guardians =  UserDefaults.standard.dictionary(forKey: UserDefaultTag.guardinas)
-		if guardians != nil {
-			return guardians as! [String: String]
-		} else {
-			return [:] as! [String: String]
+	static func getGuardians() -> [Guardian] {
+		let guardiansData = UserDefaults.standard.object(forKey: UserDefaultTag.guardinas) as? NSData
+		
+		if let guardiansData = guardiansData {
+			let guardians = NSKeyedUnarchiver.unarchiveObject(with: guardiansData as Data) as? [Guardian]
+			
+			if let guardians = guardians {
+				return guardians
+			}
 		}
+		
+		return []
 	}
 	
 	static func setUsername(_ value: String) {
@@ -64,7 +70,7 @@ class UserInfo {
 	}
 	
 	static func isUser() -> Bool {
-		return getMobile() != nil && getUsername() != nil
+		return getMobile() != nil && getUsername() != nil && getUserAuth() != nil
 	}
 	
 	static func setUuids(_ uuids: [String]) {
@@ -81,5 +87,29 @@ class UserInfo {
 	
 	static func getToken() -> String? {
 		return UserDefaults.standard.object(forKey: UserDefaultTag.token) as? String
+	}
+	
+	static func getNotificationId() -> String? {
+		return UserDefaults.standard.object(forKey: UserDefaultTag.notificationId) as? String
+	}
+	
+	static func setNotificationId(_ id: String) {
+		UserDefaults.standard.set(id, forKey: UserDefaultTag.notificationId)
+	}
+	
+	static func setUserAuth(_ auth: String) {
+		UserDefaults.standard.set(auth, forKey: UserDefaultTag.auth)
+	}
+	
+	static func getUserAuth() -> String? {
+		return UserDefaults.standard.object(forKey: UserDefaultTag.auth) as? String
+	}
+	
+	static func setUserId(id: String) {
+		UserDefaults.standard.set(id, forKey: UserDefaultTag.userId)
+	}
+	
+	static func getUserId() -> String? {
+		return UserDefaults.standard.object(forKey: UserDefaultTag.userId) as? String
 	}
 }

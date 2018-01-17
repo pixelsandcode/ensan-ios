@@ -29,6 +29,12 @@ struct UserDefaultTag {
 	static let notificationScheduled = "notificationScheduled"
 	static let uuids = "uuids"
 	static let token = "token"
+	static let auth = "auth"
+	static let hasTappedNotificationPermission = "hasTappedNotificationPermission"
+	static let isUser = "isUser"
+	static let userId = "userId"
+	static let notificationId = "notificationId"
+	static let version = "appVersion"
 }
 
 struct MainStrings {

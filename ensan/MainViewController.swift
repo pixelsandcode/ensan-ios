@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import ContactsUI
+import Alamofire
 
 class MainViewController: UIViewController {
 	
@@ -30,16 +31,16 @@ class MainViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Game is on...
+		self.getGuardians()
 		self.setupButtons()
 		self.handleByGuardians()
-		let guardiansCount = UserInfo.getUuids().count
+		
 		UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+		
+		let guardiansCount = UserInfo.getGuardians().count
 		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
 			self.setupNotification()
 		}
-		
-		//self.setupNotification()
-		//UserInfo.setGuardians([:])
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -164,7 +165,6 @@ class MainViewController: UIViewController {
 		self.viewGuardianTapped()
 	}
 	
-	
 	// MARK: - Handle Guardians
 	func handleByGuardians() {
 		let guardiansCount = UserInfo.getGuardians().count
@@ -192,7 +192,57 @@ class MainViewController: UIViewController {
 			self.mainSubtitleLabel.isHidden = true
 			self.actionContainer.isHidden = false
 		default:
-			self.mainView.backgroundColor = UIColor.dangerRed
+			self.mainView.backgroundColor = UIColor.safeGreen
+			self.closeFriendHintLabel.text = "شما \(guardiansCount) نفر افزوده اید"
+			self.mainTitleLabel.isHidden = true
+			self.mainSubtitleLabel.isHidden = true
+			self.actionContainer.isHidden = false
+		}
+	}
+	
+	func sendGuardian() {
+		Alamofire.request(ApiRouter.Router.addGuardian(name: self.pickedContact.name, mobile: self.pickedContact.mobile)).log().validate().responseJSON() {
+			response in
+			
+			if response.result.isSuccess {
+				var guardians = UserInfo.getGuardians()
+				guardians.append(self.pickedContact)
+				UserInfo.setGuardians(guardians)
+				
+				self.handleByGuardians()
+				
+				let uuids = UserInfo.getUuids()
+				if uuids.count > 0 {
+					for item in uuids {
+						self.removeNotifications(uuid: item)
+						UserInfo.setUuids([])
+					}
+				}
+				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
+			} else if response.response?.statusCode == 401 {
+				Helpers.login() {
+					success in
+					
+					if success {
+						self.sendGuardian()
+					}
+				}
+			} else {
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
+			}
+		}
+	}
+	
+	func getGuardians() {
+		Alamofire.request(ApiRouter.Router.getGuardians()).log(.verbose).validate().responseCollection() {
+			(response: DataResponse<[Guardian]>) in
+			
+			if response.result.isSuccess {
+				if let guardians = response.result.value {
+					UserInfo.setGuardians(guardians)
+					self.handleByGuardians()
+				}
+			}
 		}
 	}
 	
@@ -229,20 +279,7 @@ extension MainViewController: MFMessageComposeViewControllerDelegate {
 			controller.dismiss(animated: true) {
 				finished in
 				
-				var guardians = UserInfo.getGuardians()
-				guardians.updateValue(self.pickedContact.mobile, forKey: self.pickedContact.name)
-				UserInfo.setGuardians(guardians)
-				self.handleByGuardians()
-				
-				let uuids = UserInfo.getUuids()
-				if uuids.count > 0 {
-					for item in uuids {
-						self.removeNotifications(uuid: item)
-						UserInfo.setUuids([])
-					}
-				}
-				
-				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
+				self.sendGuardian()
 			}
 		} else {
 			controller.dismiss(animated: true) {
@@ -264,10 +301,12 @@ extension MainViewController: CNContactPickerDelegate {
 		let guardians = UserInfo.getGuardians()
 		
 		if guardians.count > 0 {
-			if guardians.values.contains(pickedContact.mobile) {
-				picker.dismiss(animated: true, completion: nil)
-				self.showAlreadyAddedAlert(self.pickedContact.mobile)
-				return
+			for guardian in guardians {
+				if guardian.mobile == pickedContact.mobile {
+					picker.dismiss(animated: true, completion: nil)
+					self.showAlreadyAddedAlert(self.pickedContact.mobile)
+					return
+				}
 			}
 		}
 		
@@ -284,42 +323,6 @@ extension MainViewController: CNContactPickerDelegate {
 			}
 		}
 	}
-	
-	//	func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
-	//
-	//		self.pickedContacts = [:]
-	//		self.messageComposeVC = nil
-	//		for item in contacts {
-	//			pickedContacts.updateValue((item.phoneNumbers.first?.value.stringValue)!, forKey: item.givenName)
-	//			print((item.phoneNumbers.first?.value.stringValue)!)
-	//			print(item.givenName)
-	//		}
-	//
-	//		print(pickedContacts.debugDescription)
-	//		let guardians = UserInfo.getGuardians()
-	//
-	//		if guardians.count > 0 {
-	//			for guardian in pickedContacts {
-	//				if guardians.values.contains(guardian.value) {
-	//					picker.dismiss(animated: true, completion: nil)
-	//					self.showAlreadyAddedAlert(guardian.value)
-	//					return
-	//				}
-	//			}
-	//		}
-	//
-	//		let phoneNumbers = Array(pickedContacts.values)
-	//		let messageComposeVC = self.configuredMessageComposeViewController(phoneNumbers)
-	//		if UserInfo.isUser() {
-	//			picker.dismiss(animated: true) {
-	//				completed in
-	//
-	//				self.present(messageComposeVC, animated: true, completion: nil)
-	//			}
-	//		} else {
-	//			performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
-	//		}
-	//	}
 	
 	func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
 		print("contact picker cancelled")

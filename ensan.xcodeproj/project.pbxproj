@@ -31,12 +31,15 @@
 		461603241FF91C74003721DB /* FineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603231FF91C74003721DB /* FineViewController.swift */; };
 		461603261FF91C82003721DB /* HurtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603251FF91C82003721DB /* HurtViewController.swift */; };
 		461603281FF9261B003721DB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603271FF9261B003721DB /* SignUpViewController.swift */; };
+		462BC220200CA713000C812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC21F200CA713000C812B /* User.swift */; };
+		462BC222200CBA20000C812B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC221200CBA20000C812B /* Helpers.swift */; };
 		468A60BF1FF7B5A200157FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A60BE1FF7B5A200157FBD /* AppDelegate.swift */; };
 		468A60C41FF7B5A200157FBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C21FF7B5A200157FBD /* Main.storyboard */; };
 		468A60C61FF7B5A200157FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C51FF7B5A200157FBD /* Assets.xcassets */; };
 		468A60C91FF7B5A200157FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C71FF7B5A200157FBD /* LaunchScreen.storyboard */; };
 		46A7D3291FFCD43700B6EA61 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A7D3281FFCD43700B6EA61 /* ApiRouter.swift */; };
 		46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E36BB91FFBDB5400368048 /* Guardian.swift */; };
+		46F0EFBF200F815D002D0AB3 /* guardian_accepted.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */; };
 		7FEB510D315A4F2518D3E250 /* Pods_ensan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708281F39EEB3EA452C9F708 /* Pods_ensan.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,8 @@
 		461603231FF91C74003721DB /* FineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineViewController.swift; sourceTree = "<group>"; };
 		461603251FF91C82003721DB /* HurtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HurtViewController.swift; sourceTree = "<group>"; };
 		461603271FF9261B003721DB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		462BC21F200CA713000C812B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		462BC221200CBA20000C812B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		468A60BB1FF7B5A200157FBD /* ensan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ensan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		468A60BE1FF7B5A200157FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		468A60C31FF7B5A200157FBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 		468A60CA1FF7B5A200157FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46A7D3281FFCD43700B6EA61 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		46E36BB91FFBDB5400368048 /* Guardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian.swift; sourceTree = "<group>"; };
+		46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guardian_accepted.png; sourceTree = "<group>"; };
 		591FF83BC23EC695B26D48A6 /* Pods-ensan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.release.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.release.xcconfig"; sourceTree = "<group>"; };
 		6ABED30E6C6FA2E27DE137C6 /* Pods-ensan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.debug.xcconfig"; sourceTree = "<group>"; };
 		708281F39EEB3EA452C9F708 /* Pods_ensan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ensan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +128,7 @@
 				461602FA1FF7BAC0003721DB /* splash_logo.png */,
 				461602FC1FF7C1E3003721DB /* logo.png */,
 				461603171FF7E342003721DB /* alert.png */,
+				46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */,
 				461603181FF7E342003721DB /* good.png */,
 				461603191FF7E342003721DB /* hurt.png */,
 				4616031A1FF7E342003721DB /* plus.png */,
@@ -174,6 +181,7 @@
 				468A60CA1FF7B5A200157FBD /* Info.plist */,
 				4616030D1FF7CF8B003721DB /* Extensions.swift */,
 				461603111FF7D805003721DB /* UserInfo.swift */,
+				462BC221200CBA20000C812B /* Helpers.swift */,
 			);
 			path = ensan;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				46E36BB91FFBDB5400368048 /* Guardian.swift */,
+				462BC21F200CA713000C812B /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -269,6 +278,7 @@
 				461603051FF7C5E6003721DB /* IRANSans_Black.ttf in Resources */,
 				461603071FF7C5E6003721DB /* IRANSans_Light.ttf in Resources */,
 				4616031B1FF7E342003721DB /* alert.png in Resources */,
+				46F0EFBF200F815D002D0AB3 /* guardian_accepted.png in Resources */,
 				4616031E1FF7E342003721DB /* plus.png in Resources */,
 				461603061FF7C5E6003721DB /* IRANSans_Bold.ttf in Resources */,
 				468A60C61FF7B5A200157FBD /* Assets.xcassets in Resources */,
@@ -343,11 +353,13 @@
 				468A60BF1FF7B5A200157FBD /* AppDelegate.swift in Sources */,
 				461603221FF900CB003721DB /* GuardianCell.swift in Sources */,
 				461603201FF90073003721DB /* GuardianViewController.swift in Sources */,
+				462BC220200CA713000C812B /* User.swift in Sources */,
 				461603241FF91C74003721DB /* FineViewController.swift in Sources */,
 				461603161FF7DBD8003721DB /* SegueHandlerType.swift in Sources */,
 				46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */,
 				46A7D3291FFCD43700B6EA61 /* ApiRouter.swift in Sources */,
 				461603101FF7D539003721DB /* Colors.swift in Sources */,
+				462BC222200CBA20000C812B /* Helpers.swift in Sources */,
 				4616030C1FF7CB29003721DB /* Strings.swift in Sources */,
 				461602F71FF7B985003721DB /* SplashViewController.swift in Sources */,
 				461603261FF91C82003721DB /* HurtViewController.swift in Sources */,
@@ -477,12 +489,15 @@
 			baseConfigurationReference = 6ABED30E6C6FA2E27DE137C6 /* Pods-ensan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6WK556Y4B8;
 				INFOPLIST_FILE = ensan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ir.app..ensan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -492,12 +507,15 @@
 			baseConfigurationReference = 591FF83BC23EC695B26D48A6 /* Pods-ensan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6WK556Y4B8;
 				INFOPLIST_FILE = ensan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ir.app..ensan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
