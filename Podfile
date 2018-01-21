@@ -5,5 +5,6 @@ target 'ensan' do
 
 	pod 'RevealingSplashView'
 	pod 'Alamofire', '~> 4.5'
-
+	pod 'Firebase/Core'
+	pod 'Firebase/Messaging'
 end

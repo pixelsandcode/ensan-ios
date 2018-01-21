@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import ContactsUI
 import Alamofire
+import UserNotifications
 
 class MainViewController: UIViewController {
 	
@@ -25,17 +26,18 @@ class MainViewController: UIViewController {
 	@IBOutlet weak var actionContainer: UIStackView!
 	
 	var pickedContact: Guardian = Guardian()
+	let gcmMessageIDKey = "gcm.message_id"
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Game is on...
-		self.getGuardians()
+		if UserInfo.isUser() {
+			self.getGuardians()
+		}
 		self.setupButtons()
 		self.handleByGuardians()
-		
-		UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
 		
 		let guardiansCount = UserInfo.getGuardians().count
 		if !UserInfo.notificationScheduled() && guardiansCount == 0 {

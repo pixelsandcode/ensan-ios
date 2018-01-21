@@ -242,7 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.png" translatesAutoresizingMaskIntoConstraints="NO" id="6ke-vb-MmP">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_large.png" translatesAutoresizingMaskIntoConstraints="NO" id="6ke-vb-MmP">
                                 <rect key="frame" x="97" y="223.5" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="Z74-4Q-Cha"/>
@@ -604,12 +604,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add_large.png" width="180" height="180"/>
         <image name="alert.png" width="52" height="52"/>
         <image name="back" width="11" height="18"/>
         <image name="eye" width="28" height="20"/>
         <image name="good.png" width="116" height="116"/>
         <image name="hurt.png" width="116" height="116"/>
         <image name="logo.png" width="500" height="461"/>
-        <image name="plus.png" width="52" height="52"/>
     </resources>
 </document>
