@@ -161,6 +161,9 @@ struct ApiRouter {
 		case signup(name: String, mobile: String)
 		case addGuardian(name: String, mobile: String)
 		case getGuardians()
+		case registerDevice()
+		case verifyPin(pin: String)
+		case generatePin()
 		
 		var method: Alamofire.HTTPMethod {
 			switch self {
@@ -172,6 +175,12 @@ struct ApiRouter {
 				return .post
 			case .getGuardians:
 				return .get
+			case .registerDevice:
+				return .post
+			case .verifyPin:
+				return .post
+			case .generatePin():
+				return .post
 			}
 		}
 		
@@ -189,6 +198,15 @@ struct ApiRouter {
 					return ("user/guardians", params as [String : AnyObject])
 				case .getGuardians():
 					return ("user/guardians", nil)
+				case .registerDevice():
+					let params = ["token": UserInfo.getNotificationId()]
+					return ("user/devices", params as [String : AnyObject])
+				case .verifyPin(let pin):
+					let params = ["pin": pin, "mobile": UserInfo.getMobile()]
+					return ("user/verify", params as [String : AnyObject])
+				case .generatePin():
+					let params = ["mobile": UserInfo.getMobile()]
+					return ("/user/login", params as [String : AnyObject])
 				}
 			}()
 			

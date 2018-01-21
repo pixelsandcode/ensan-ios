@@ -451,6 +451,7 @@
                         <outlet property="backContainer" destination="IB8-ny-bgY" id="7H0-Xp-m86"/>
                         <outlet property="mobileTextField" destination="43t-Tf-wrA" id="boT-3D-OTz"/>
                         <outlet property="nameTextField" destination="hlK-9B-UZA" id="iB7-rt-HWB"/>
+                        <segue destination="lrh-qW-gaJ" kind="show" identifier="showPin" id="WTT-tz-qYc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mrl-Xj-MKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -601,6 +602,114 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hqx-6U-UOa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+        </scene>
+        <!--Pin View Controller-->
+        <scene sceneID="gQ1-pk-lHn">
+            <objects>
+                <viewController id="lrh-qW-gaJ" customClass="PinViewController" customModule="ensan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bKl-kC-cYX"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZLf-VL-lWf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PR3-77-zK1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xc6-TS-Dv3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="بازیابی حساب کاربری" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yio-xG-eBy">
+                                        <rect key="frame" x="108" y="10" width="160.5" height="30"/>
+                                        <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ojd-yD-z1S">
+                                        <rect key="frame" x="301" y="13" width="65.5" height="25.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="برگشت" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFQ-SH-wy8">
+                                                <rect key="frame" x="0.0" y="0.0" width="46.5" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="Fk1-4O-xRj">
+                                                <rect key="frame" x="54.5" y="4" width="11" height="18"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yio-xG-eBy" firstAttribute="centerY" secondItem="Xc6-TS-Dv3" secondAttribute="centerY" id="bCO-ZU-5rK"/>
+                                    <constraint firstItem="yio-xG-eBy" firstAttribute="centerX" secondItem="Xc6-TS-Dv3" secondAttribute="centerX" id="epG-rb-8hx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ojd-yD-z1S" secondAttribute="trailing" constant="8" id="hVs-vi-QoW"/>
+                                    <constraint firstAttribute="height" constant="50" id="i35-Fd-FsB"/>
+                                    <constraint firstItem="Ojd-yD-z1S" firstAttribute="centerY" secondItem="Xc6-TS-Dv3" secondAttribute="centerY" id="xSU-e3-UzZ"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="کد SMS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67S-9N-stn">
+                                <rect key="frame" x="24" y="90" width="327" height="26"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fcs-UV-So8">
+                                <rect key="frame" x="24" y="124" width="327" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="XPn-1m-e5N"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Szq-yf-wa2">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.43921568630000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="I5N-OC-UiM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSans-Medium" family="IRANSans" pointSize="20"/>
+                                <state key="normal" title="بازیابی">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendTapped:" destination="lrh-qW-gaJ" eventType="touchUpInside" id="ZRM-31-m0V"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="حساب کاربری با این شماره موبایل وجود دارد. برای دسترسی لطفا کد ارسال شده از طریق SMS را وارد کنید." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY4-Jq-FdF">
+                                <rect key="frame" x="24" y="145" width="327" height="47"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.26274509800000001" green="0.62745098040000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Xc6-TS-Dv3" firstAttribute="top" secondItem="bKl-kC-cYX" secondAttribute="bottom" id="3va-Zf-VxR"/>
+                            <constraint firstAttribute="trailing" secondItem="67S-9N-stn" secondAttribute="trailing" constant="24" id="5mV-Zh-KLE"/>
+                            <constraint firstItem="dY4-Jq-FdF" firstAttribute="leading" secondItem="67S-9N-stn" secondAttribute="leading" id="A0W-Jk-WOZ"/>
+                            <constraint firstItem="dY4-Jq-FdF" firstAttribute="top" secondItem="Fcs-UV-So8" secondAttribute="bottom" constant="20" id="Aua-8t-Oje"/>
+                            <constraint firstItem="Xc6-TS-Dv3" firstAttribute="leading" secondItem="PR3-77-zK1" secondAttribute="leading" id="NsS-9l-3pt"/>
+                            <constraint firstAttribute="trailing" secondItem="Xc6-TS-Dv3" secondAttribute="trailing" id="asU-OH-ZzZ"/>
+                            <constraint firstItem="67S-9N-stn" firstAttribute="top" secondItem="Xc6-TS-Dv3" secondAttribute="bottom" constant="20" id="dXA-2o-KVA"/>
+                            <constraint firstItem="Szq-yf-wa2" firstAttribute="leading" secondItem="PR3-77-zK1" secondAttribute="leading" id="dcL-2a-P9V"/>
+                            <constraint firstItem="ZLf-VL-lWf" firstAttribute="top" secondItem="Szq-yf-wa2" secondAttribute="bottom" id="dxf-K1-C9g"/>
+                            <constraint firstItem="Fcs-UV-So8" firstAttribute="top" secondItem="67S-9N-stn" secondAttribute="bottom" constant="8" id="l48-RP-SEv"/>
+                            <constraint firstAttribute="trailing" secondItem="Szq-yf-wa2" secondAttribute="trailing" id="ovY-hn-ede"/>
+                            <constraint firstItem="Fcs-UV-So8" firstAttribute="leading" secondItem="67S-9N-stn" secondAttribute="leading" id="p5b-5b-H2Q"/>
+                            <constraint firstItem="dY4-Jq-FdF" firstAttribute="trailing" secondItem="67S-9N-stn" secondAttribute="trailing" id="ti0-pg-3jd"/>
+                            <constraint firstItem="Fcs-UV-So8" firstAttribute="trailing" secondItem="67S-9N-stn" secondAttribute="trailing" id="wVq-xH-hZi"/>
+                            <constraint firstItem="67S-9N-stn" firstAttribute="leading" secondItem="PR3-77-zK1" secondAttribute="leading" constant="24" id="yLS-eE-oeS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backContainer" destination="Ojd-yD-z1S" id="LSv-Gg-Cc9"/>
+                        <outlet property="pinTextField" destination="67S-9N-stn" id="82K-7c-OS2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nKe-8G-eMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2601" y="781"/>
         </scene>
     </scenes>
     <resources>

@@ -68,19 +68,47 @@ class SignUpViewController: UIViewController {
 					
 					(response: DataResponse<User>) in
 					
-					let _ = Helpers.getAndSaveToken(response: response.response!)
-					let user = response.result.value
-					if let user = user {
-						User.saveUser(user)
+					if response.result.isSuccess {
+						let _ = Helpers.getAndSaveToken(response: response.response!)
+						let user = response.result.value
+						if let user = user {
+							User.saveUser(user)
+							self.sendDeviceToken()
+						}
+						
+						self.back()
+						print(user.debugDescription)
+					}  else if response.response?.statusCode == 409 {
+						Alamofire.request(ApiRouter.Router.generatePin()).log().validate().responseJSON() {
+							response in
+							
+							if response.result.isSuccess {
+								self.performSegueWithIdentifier(segueIdentifier: .showPin, sender: self)
+							} else {
+								// TODO: show error
+							}
+						}
+						
+					} else {
+						// TODO: show error
 					}
-					
-					self.back()
-					print(user.debugDescription)
 				}
-			} else {
-				// TODO: show error
 			}
 			
+		}
+	}
+	
+	func sendDeviceToken() {
+		if UserInfo.isUser() && UserInfo.getNotificationId() != nil {
+			Alamofire.request(ApiRouter.Router.registerDevice()).log().validate().responseJSON() {
+				response in
+				
+				if response.result.isSuccess {
+					print("notification sent to api")
+				} else {
+					print(response.result.error.debugDescription)
+				}
+			}
 		}
 	}
 	
@@ -121,17 +149,13 @@ class SignUpViewController: UIViewController {
 			return
 		}
 	}
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
+}
+
+// MARK: - Navigation
+extension SignUpViewController: SegueHandlerType {
+	enum SegueIdentifier: String {
+		case showPin
 	}
-	*/
-	
 }
 
 // MARK: - TextField Delegate

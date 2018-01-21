@@ -31,6 +31,7 @@
 		461603241FF91C74003721DB /* FineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603231FF91C74003721DB /* FineViewController.swift */; };
 		461603261FF91C82003721DB /* HurtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603251FF91C82003721DB /* HurtViewController.swift */; };
 		461603281FF9261B003721DB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603271FF9261B003721DB /* SignUpViewController.swift */; };
+		4627DEAE2014F47F00935299 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627DEAD2014F47F00935299 /* PinViewController.swift */; };
 		462BC220200CA713000C812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC21F200CA713000C812B /* User.swift */; };
 		462BC222200CBA20000C812B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC221200CBA20000C812B /* Helpers.swift */; };
 		4642F645200F921C00046C76 /* add_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 4642F644200F921C00046C76 /* add_large.png */; };
@@ -70,6 +71,7 @@
 		461603231FF91C74003721DB /* FineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FineViewController.swift; sourceTree = "<group>"; };
 		461603251FF91C82003721DB /* HurtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HurtViewController.swift; sourceTree = "<group>"; };
 		461603271FF9261B003721DB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4627DEAD2014F47F00935299 /* PinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		462BC21F200CA713000C812B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		462BC221200CBA20000C812B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		4642F644200F921C00046C76 /* add_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_large.png; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				461603231FF91C74003721DB /* FineViewController.swift */,
 				461603251FF91C82003721DB /* HurtViewController.swift */,
 				461603271FF9261B003721DB /* SignUpViewController.swift */,
+				4627DEAD2014F47F00935299 /* PinViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			files = (
 				461603141FF7DABE003721DB /* MainViewController.swift in Sources */,
 				468A60BF1FF7B5A200157FBD /* AppDelegate.swift in Sources */,
+				4627DEAE2014F47F00935299 /* PinViewController.swift in Sources */,
 				461603221FF900CB003721DB /* GuardianCell.swift in Sources */,
 				461603201FF90073003721DB /* GuardianViewController.swift in Sources */,
 				462BC220200CA713000C812B /* User.swift in Sources */,

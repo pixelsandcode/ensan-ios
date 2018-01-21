@@ -207,7 +207,7 @@ class MainViewController: UIViewController {
 	}
 	
 	func sendGuardian() {
-		Alamofire.request(ApiRouter.Router.addGuardian(name: self.pickedContact.name, mobile: self.pickedContact.mobile)).log().validate().responseJSON() {
+		Alamofire.request(ApiRouter.Router.addGuardian(name: self.pickedContact.name, mobile: self.pickedContact.mobile)).log(.verbose).validate().responseJSON() {
 			response in
 			
 			if response.result.isSuccess {
@@ -302,7 +302,13 @@ extension MainViewController: CNContactPickerDelegate {
 	func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
 		self.pickedContact = Guardian()
 		self.pickedContact.name = contact.givenName
-		self.pickedContact.mobile = (contact.phoneNumbers.first?.value.stringValue)!
+		if let mobile = contact.phoneNumbers.first?.value.stringValue {
+			let fixedMobile = mobile.replacingOccurrences(of: " ", with: "")
+			self.pickedContact.mobile = fixedMobile
+		} else {
+			self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.badNumber)
+			return
+		}
 		
 		let guardians = UserInfo.getGuardians()
 		

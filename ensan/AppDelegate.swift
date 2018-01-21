@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -162,9 +163,18 @@ extension AppDelegate : MessagingDelegate {
 	// [START refresh_token]
 	func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
 		print("Firebase registration token: \(fcmToken)")
-		
-		// TODO: If necessary send token to application server.
-		// Note: This callback is fired at each app startup and whenever a new token is generated.
+		UserInfo.setNotificationId(fcmToken)
+		if UserInfo.isUser() {
+			Alamofire.request(ApiRouter.Router.registerDevice()).log().validate().responseJSON() {
+				response in
+				
+				if response.result.isSuccess {
+					print("notification sent to api")
+				} else {
+					print(response.result.error.debugDescription)
+				}
+			}
+		}
 	}
 	// [END refresh_token]
 	// [START ios_10_data_message]

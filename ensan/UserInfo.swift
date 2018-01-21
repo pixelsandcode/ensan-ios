@@ -70,6 +70,9 @@ class UserInfo {
 	}
 	
 	static func isUser() -> Bool {
+		print(getMobile()?.debugDescription)
+		print(getUsername().debugDescription)
+		print(getUserAuth().debugDescription)
 		return getMobile() != nil && getUsername() != nil && getUserAuth() != nil
 	}
 	
