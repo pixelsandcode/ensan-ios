@@ -61,6 +61,7 @@ struct MainStrings {
 	static let inDanger = "در خطر است"
 	static let networkError = "شما به اینترنت متصل نیستید"
 	static let loading = "صبور باشید"
+	static let wrongPin = "کد اشتباه است"
 }
 
 struct ValidationErrors {

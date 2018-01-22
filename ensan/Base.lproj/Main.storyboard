@@ -459,6 +459,7 @@
                     </view>
                     <connections>
                         <outlet property="backContainer" destination="IB8-ny-bgY" id="7H0-Xp-m86"/>
+                        <outlet property="buttonContainerBottomConst" destination="io1-j7-YOW" id="gEr-Y1-Y3Q"/>
                         <outlet property="mobileTextField" destination="43t-Tf-wrA" id="boT-3D-OTz"/>
                         <outlet property="nameTextField" destination="hlK-9B-UZA" id="iB7-rt-HWB"/>
                         <segue destination="lrh-qW-gaJ" kind="show" identifier="showPin" id="WTT-tz-qYc"/>
@@ -714,6 +715,7 @@
                     </view>
                     <connections>
                         <outlet property="backContainer" destination="Ojd-yD-z1S" id="LSv-Gg-Cc9"/>
+                        <outlet property="buttonContainerBottomConst" destination="dxf-K1-C9g" id="7Lb-4q-hEX"/>
                         <outlet property="pinTextField" destination="67S-9N-stn" id="82K-7c-OS2"/>
                     </connections>
                 </viewController>

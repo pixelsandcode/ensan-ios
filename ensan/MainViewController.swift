@@ -315,6 +315,7 @@ class MainViewController: UIViewController {
 				
 				if response.result.isSuccess {
 					print("notification sent to api")
+					print(UserInfo.getNotificationId())
 				} else {
 					print(response.result.error.debugDescription)
 				}

@@ -13,6 +13,7 @@ class PinViewController: UIViewController {
 	
 	@IBOutlet weak var backContainer: UIStackView!
 	@IBOutlet weak var pinTextField: UITextField!
+	@IBOutlet weak var buttonContainerBottomConst: NSLayoutConstraint!
 	
 	var enteredPin = ""
 	
@@ -24,6 +25,17 @@ class PinViewController: UIViewController {
 		self.backContainer.isUserInteractionEnabled = true
 		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
 		self.backContainer.addGestureRecognizer(backTGR)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.registerForKeyboardNotifications()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.deregisterFromKeyboardNotifications()
 	}
 	
 	func alertWithTitle(_ viewController: UIViewController, title: String!, message: String) {
@@ -70,6 +82,8 @@ class PinViewController: UIViewController {
 				}
 				
 				print(user.debugDescription)
+			} else if response.response?.statusCode == 403 {
+				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.wrongPin)
 			}
 		}
 	}
@@ -110,6 +124,37 @@ class PinViewController: UIViewController {
 		guard let _ = (navigationController?.popViewController(animated: true)) else {
 			dismiss(animated: true, completion: nil)
 			return
+		}
+	}
+	
+	// MARK: - Keyboard Helpers
+	func registerForKeyboardNotifications() {
+		//Adding notifies on keyboard appearing
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+	}
+	
+	func deregisterFromKeyboardNotifications() {
+		//Removing notifies on keyboard appearing
+		NotificationCenter.default.removeObserver(self)
+	}
+	
+	func keyboardNotification(_ notification: Foundation.Notification) {
+		if let userInfo = notification.userInfo {
+			let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+			let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+			let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+			let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions().rawValue
+			let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+			if let endFrameHeight = endFrame?.origin.y, endFrameHeight >= UIScreen.main.bounds.size.height {
+				self.buttonContainerBottomConst?.constant = 0.0
+			} else {
+				self.buttonContainerBottomConst?.constant = endFrame!.size.height
+			}
+			UIView.animate(withDuration: duration,
+										 delay: TimeInterval(0),
+										 options: animationCurve,
+										 animations: { self.view.layoutIfNeeded() },
+										 completion: nil)
 		}
 	}
 }

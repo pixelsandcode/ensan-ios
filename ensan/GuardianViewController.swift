@@ -170,6 +170,7 @@ extension GuardianViewController: UITableViewDataSource {
 			cell.mobileLabel.isHidden = true
 			cell.statusLabel.isHidden = true
 		} else {
+			cell.mobileLabel.isHidden = false
 			let obj = self.guardians[position]
 			cell.nameLabel.text = obj.name
 			cell.mobileLabel.text = obj.mobile
