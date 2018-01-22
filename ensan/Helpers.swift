@@ -8,8 +8,10 @@
 
 import Foundation
 import Alamofire
+import SwiftSpinner
 
 class Helpers {
+	
 	static func getAndSaveToken(response: HTTPURLResponse) -> Bool {
 		let headerFields = response.allHeaderFields
 		let token = headerFields["Authorization"]
@@ -34,5 +36,23 @@ class Helpers {
 				completion(false)
 			}
 		}
+	}
+	
+	static func alertWithTitle(_ viewController: UIViewController, title: String!, message: String) {
+		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) {
+			UIAlertAction in
+		}
+		
+		alert.addAction(action)
+		viewController.present(alert, animated: true, completion:nil)
+	}
+	
+	static func showLoading() {
+		SwiftSpinner.show(MainStrings.loading)
+	}
+	
+	static func hideLoading() {
+		SwiftSpinner.hide()
 	}
 }

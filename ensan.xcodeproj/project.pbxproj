@@ -32,9 +32,9 @@
 		461603261FF91C82003721DB /* HurtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603251FF91C82003721DB /* HurtViewController.swift */; };
 		461603281FF9261B003721DB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461603271FF9261B003721DB /* SignUpViewController.swift */; };
 		4627DEAE2014F47F00935299 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627DEAD2014F47F00935299 /* PinViewController.swift */; };
+		4627DEB120161ECE00935299 /* NotifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627DEB020161ECE00935299 /* NotifyRequest.swift */; };
 		462BC220200CA713000C812B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC21F200CA713000C812B /* User.swift */; };
 		462BC222200CBA20000C812B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462BC221200CBA20000C812B /* Helpers.swift */; };
-		4642F645200F921C00046C76 /* add_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 4642F644200F921C00046C76 /* add_large.png */; };
 		4642F647200F9A7E00046C76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4642F646200F9A7E00046C76 /* GoogleService-Info.plist */; };
 		468A60BF1FF7B5A200157FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468A60BE1FF7B5A200157FBD /* AppDelegate.swift */; };
 		468A60C41FF7B5A200157FBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468A60C21FF7B5A200157FBD /* Main.storyboard */; };
@@ -43,6 +43,8 @@
 		46A7D3291FFCD43700B6EA61 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A7D3281FFCD43700B6EA61 /* ApiRouter.swift */; };
 		46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E36BB91FFBDB5400368048 /* Guardian.swift */; };
 		46F0EFBF200F815D002D0AB3 /* guardian_accepted.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */; };
+		46F442242016387E004BFEAF /* add_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F442232016387E004BFEAF /* add_large.png */; };
+		46F4422620163CC3004BFEAF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F4422520163CC3004BFEAF /* Reachability.swift */; };
 		7FEB510D315A4F2518D3E250 /* Pods_ensan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708281F39EEB3EA452C9F708 /* Pods_ensan.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,9 +74,9 @@
 		461603251FF91C82003721DB /* HurtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HurtViewController.swift; sourceTree = "<group>"; };
 		461603271FF9261B003721DB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4627DEAD2014F47F00935299 /* PinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
+		4627DEB020161ECE00935299 /* NotifyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyRequest.swift; sourceTree = "<group>"; };
 		462BC21F200CA713000C812B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		462BC221200CBA20000C812B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		4642F644200F921C00046C76 /* add_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_large.png; sourceTree = "<group>"; };
 		4642F646200F9A7E00046C76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		468A60BB1FF7B5A200157FBD /* ensan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ensan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		468A60BE1FF7B5A200157FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,8 @@
 		46DAF138200FA470005B362C /* ensan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ensan.entitlements; sourceTree = "<group>"; };
 		46E36BB91FFBDB5400368048 /* Guardian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guardian.swift; sourceTree = "<group>"; };
 		46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guardian_accepted.png; sourceTree = "<group>"; };
+		46F442232016387E004BFEAF /* add_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_large.png; path = ../../../Assets/ensan/ADD/add_large.png; sourceTree = "<group>"; };
+		46F4422520163CC3004BFEAF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		591FF83BC23EC695B26D48A6 /* Pods-ensan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.release.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.release.xcconfig"; sourceTree = "<group>"; };
 		6ABED30E6C6FA2E27DE137C6 /* Pods-ensan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ensan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ensan/Pods-ensan.debug.xcconfig"; sourceTree = "<group>"; };
 		708281F39EEB3EA452C9F708 /* Pods_ensan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ensan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,8 +143,8 @@
 				46F0EFBE200F815D002D0AB3 /* guardian_accepted.png */,
 				461603181FF7E342003721DB /* good.png */,
 				461603191FF7E342003721DB /* hurt.png */,
+				46F442232016387E004BFEAF /* add_large.png */,
 				4616031A1FF7E342003721DB /* plus.png */,
-				4642F644200F921C00046C76 /* add_large.png */,
 				4616030B1FF7CB29003721DB /* Strings.swift */,
 				4616030F1FF7D539003721DB /* Colors.swift */,
 			);
@@ -158,6 +162,14 @@
 				461603041FF7C5E6003721DB /* IRANSans.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		4627DEAF20161EB500935299 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				4627DEB020161ECE00935299 /* NotifyRequest.swift */,
+			);
+			name = Request;
 			sourceTree = "<group>";
 		};
 		468A60B21FF7B5A200157FBD = {
@@ -193,6 +205,7 @@
 				4616030D1FF7CF8B003721DB /* Extensions.swift */,
 				461603111FF7D805003721DB /* UserInfo.swift */,
 				462BC221200CBA20000C812B /* Helpers.swift */,
+				46F4422520163CC3004BFEAF /* Reachability.swift */,
 			);
 			path = ensan;
 			sourceTree = "<group>";
@@ -200,6 +213,7 @@
 		46E36BB81FFBDB2B00368048 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4627DEAF20161EB500935299 /* Request */,
 				46E36BB91FFBDB5400368048 /* Guardian.swift */,
 				462BC21F200CA713000C812B /* User.swift */,
 			);
@@ -286,9 +300,9 @@
 				468A60C91FF7B5A200157FBD /* LaunchScreen.storyboard in Resources */,
 				461603091FF7C5E6003721DB /* IRANSans_UltraLight.ttf in Resources */,
 				461602FD1FF7C1E3003721DB /* logo.png in Resources */,
-				4642F645200F921C00046C76 /* add_large.png in Resources */,
 				461603081FF7C5E6003721DB /* IRANSans_Medium.ttf in Resources */,
 				461602FB1FF7BAC0003721DB /* splash_logo.png in Resources */,
+				46F442242016387E004BFEAF /* add_large.png in Resources */,
 				4616030A1FF7C5E6003721DB /* IRANSans.ttf in Resources */,
 				4616031D1FF7E342003721DB /* hurt.png in Resources */,
 				4616031C1FF7E342003721DB /* good.png in Resources */,
@@ -351,6 +365,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -359,6 +374,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealingSplashView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +392,7 @@
 				461603141FF7DABE003721DB /* MainViewController.swift in Sources */,
 				468A60BF1FF7B5A200157FBD /* AppDelegate.swift in Sources */,
 				4627DEAE2014F47F00935299 /* PinViewController.swift in Sources */,
+				4627DEB120161ECE00935299 /* NotifyRequest.swift in Sources */,
 				461603221FF900CB003721DB /* GuardianCell.swift in Sources */,
 				461603201FF90073003721DB /* GuardianViewController.swift in Sources */,
 				462BC220200CA713000C812B /* User.swift in Sources */,
@@ -390,6 +407,7 @@
 				461603261FF91C82003721DB /* HurtViewController.swift in Sources */,
 				461603121FF7D805003721DB /* UserInfo.swift in Sources */,
 				461603281FF9261B003721DB /* SignUpViewController.swift in Sources */,
+				46F4422620163CC3004BFEAF /* Reachability.swift in Sources */,
 				4616030E1FF7CF8B003721DB /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,7 +553,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ensan/ensan.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = P22FGD9T57;
 				INFOPLIST_FILE = ensan/Info.plist;
@@ -543,8 +561,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ir.app.ensan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "03272d39-7341-4d32-8fe9-f3700d66d2bd";
-				PROVISIONING_PROFILE_SPECIFIER = "FCM Development";
+				PROVISIONING_PROFILE = "176f7d58-d7d6-46aa-9312-6293217f62d4";
+				PROVISIONING_PROFILE_SPECIFIER = "Ensan Store";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

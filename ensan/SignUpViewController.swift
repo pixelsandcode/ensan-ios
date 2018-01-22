@@ -64,11 +64,19 @@ class SignUpViewController: UIViewController {
 	func signUp() {
 		if !isError() {
 			if let name = UserInfo.getUsername(), let mobile = UserInfo.getMobile() {
+				
+				if !Reachability.connectedToNetwork() {
+					Helpers.alertWithTitle(self, title: MainStrings.error, message: MainStrings.networkError)
+					return
+				}
+				
+				Helpers.showLoading()
 				Alamofire.request(ApiRouter.Router.signup(name: name, mobile: mobile)).log().validate().responseObject() {
 					
 					(response: DataResponse<User>) in
 					
 					if response.result.isSuccess {
+						Helpers.hideLoading()
 						let _ = Helpers.getAndSaveToken(response: response.response!)
 						let user = response.result.value
 						if let user = user {
@@ -82,6 +90,7 @@ class SignUpViewController: UIViewController {
 						Alamofire.request(ApiRouter.Router.generatePin()).log().validate().responseJSON() {
 							response in
 							
+							Helpers.hideLoading()
 							if response.result.isSuccess {
 								self.performSegueWithIdentifier(segueIdentifier: .showPin, sender: self)
 							} else {
@@ -90,11 +99,11 @@ class SignUpViewController: UIViewController {
 						}
 						
 					} else {
+						Helpers.hideLoading()
 						// TODO: show error
 					}
 				}
 			}
-			
 		}
 	}
 	

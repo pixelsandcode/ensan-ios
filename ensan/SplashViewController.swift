@@ -45,12 +45,12 @@ class SplashViewController: UIViewController {
 		self.view.addSubview(revealingSplashView)
 		
 		revealingSplashView.animationType = SplashAnimationType.heartBeat
-		revealingSplashView.duration = 3.0
+		revealingSplashView.duration = 2.0
 		revealingSplashView.startAnimation(){
 			print("Completed")
 		}
 		
-		let when = DispatchTime.now() + 3
+		let when = DispatchTime.now() + 2
 		DispatchQueue.main.asyncAfter(deadline: when) {
 			revealingSplashView.finishHeartBeatAnimation()
 			if !UserInfo.getIntroSeen() {

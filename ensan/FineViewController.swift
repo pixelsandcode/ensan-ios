@@ -18,7 +18,7 @@ class FineViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Game is on ...
-		let guardiansCount = UserInfo.getGuardians().count
+		let guardiansCount = UserInfo.getGuardians().filter({$0.state == "joined"}).count
 		self.descriptionLabel.text = "\(guardiansCount) \(MainStrings.notifiedFine)"
 	}
 	

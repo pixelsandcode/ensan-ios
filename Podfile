@@ -7,4 +7,5 @@ target 'ensan' do
 	pod 'Alamofire', '~> 4.5'
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
+	pod 'SwiftSpinner'
 end

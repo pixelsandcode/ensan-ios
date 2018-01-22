@@ -352,8 +352,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PoD-re-s8f">
                                 <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اطلاعات شما" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-z3-QQ0">
-                                        <rect key="frame" x="140.5" y="10" width="95" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ثبت نام" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-z3-QQ0">
+                                        <rect key="frame" x="158.5" y="10" width="59" height="30"/>
                                         <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -382,29 +382,35 @@
                                     <constraint firstItem="7MU-z3-QQ0" firstAttribute="centerY" secondItem="PoD-re-s8f" secondAttribute="centerY" id="wcj-q1-QvT"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="لطفا نام و شماره موبایل شخصی خود را وارد کنید" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCU-V9-bqA">
+                                <rect key="frame" x="24" y="90" width="327" height="59.5"/>
+                                <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="نام کامل شما" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hlK-9B-UZA">
-                                <rect key="frame" x="24" y="90" width="327" height="26"/>
+                                <rect key="frame" x="24" y="169.5" width="327" height="26"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GBu-hO-L0v">
-                                <rect key="frame" x="24" y="124" width="327" height="1"/>
+                                <rect key="frame" x="24" y="203.5" width="327" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Srs-TJ-aWq"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="شماره موبایل" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43t-Tf-wrA">
-                                <rect key="frame" x="24" y="145" width="327" height="26"/>
+                                <rect key="frame" x="24" y="224.5" width="327" height="26"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="IRANSans" family="IRANSans" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pqQ-5K-Po2">
-                                <rect key="frame" x="24" y="179" width="327" height="1"/>
+                                <rect key="frame" x="24" y="258.5" width="327" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ZjX-w1-gCT"/>
@@ -417,7 +423,7 @@
                                     <constraint firstAttribute="height" constant="50" id="74c-rV-hnu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="IRANSans-Medium" family="IRANSans" pointSize="20"/>
-                                <state key="normal" title="ارسال">
+                                <state key="normal" title="ایجاد حساب کاربری">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -429,11 +435,12 @@
                         <constraints>
                             <constraint firstItem="43t-Tf-wrA" firstAttribute="leading" secondItem="hlK-9B-UZA" secondAttribute="leading" id="1OW-KK-6kh"/>
                             <constraint firstAttribute="trailing" secondItem="hlK-9B-UZA" secondAttribute="trailing" constant="24" id="22S-uu-LEo"/>
-                            <constraint firstItem="hlK-9B-UZA" firstAttribute="top" secondItem="PoD-re-s8f" secondAttribute="bottom" constant="20" id="4HX-u0-uCg"/>
                             <constraint firstItem="43t-Tf-wrA" firstAttribute="trailing" secondItem="hlK-9B-UZA" secondAttribute="trailing" id="8be-28-g24"/>
                             <constraint firstItem="GBu-hO-L0v" firstAttribute="leading" secondItem="hlK-9B-UZA" secondAttribute="leading" id="AhO-CC-Mml"/>
                             <constraint firstItem="pqQ-5K-Po2" firstAttribute="top" secondItem="43t-Tf-wrA" secondAttribute="bottom" constant="8" id="Cab-gi-3FR"/>
                             <constraint firstItem="pqQ-5K-Po2" firstAttribute="trailing" secondItem="hlK-9B-UZA" secondAttribute="trailing" id="Ejc-fa-nr0"/>
+                            <constraint firstItem="hlK-9B-UZA" firstAttribute="top" secondItem="KCU-V9-bqA" secondAttribute="bottom" constant="20" id="IpY-pN-wYo"/>
+                            <constraint firstItem="KCU-V9-bqA" firstAttribute="trailing" secondItem="hlK-9B-UZA" secondAttribute="trailing" id="KLE-Ye-4Kf"/>
                             <constraint firstItem="GBu-hO-L0v" firstAttribute="top" secondItem="hlK-9B-UZA" secondAttribute="bottom" constant="8" id="PvB-sh-oIP"/>
                             <constraint firstItem="PoD-re-s8f" firstAttribute="leading" secondItem="YsR-RI-F2W" secondAttribute="leading" id="RJb-Ly-u2Y"/>
                             <constraint firstAttribute="trailing" secondItem="PoD-re-s8f" secondAttribute="trailing" id="Rnj-xr-WTq"/>
@@ -442,9 +449,12 @@
                             <constraint firstItem="PoD-re-s8f" firstAttribute="top" secondItem="FWs-W6-5yi" secondAttribute="bottom" id="WnF-jl-UJu"/>
                             <constraint firstItem="GBu-hO-L0v" firstAttribute="trailing" secondItem="hlK-9B-UZA" secondAttribute="trailing" id="YO7-tc-pV7"/>
                             <constraint firstItem="seq-nI-jmT" firstAttribute="leading" secondItem="YsR-RI-F2W" secondAttribute="leading" id="Zy5-GK-eeW"/>
+                            <constraint firstItem="KCU-V9-bqA" firstAttribute="top" secondItem="PoD-re-s8f" secondAttribute="bottom" constant="20" id="c7x-VT-oKg"/>
                             <constraint firstItem="hlK-9B-UZA" firstAttribute="leading" secondItem="YsR-RI-F2W" secondAttribute="leading" constant="24" id="dPa-q8-fXo"/>
                             <constraint firstItem="43t-Tf-wrA" firstAttribute="top" secondItem="GBu-hO-L0v" secondAttribute="bottom" constant="20" id="gdH-gb-xD9"/>
+                            <constraint firstItem="7MU-z3-QQ0" firstAttribute="centerX" secondItem="YsR-RI-F2W" secondAttribute="centerX" id="hHu-gI-FIH"/>
                             <constraint firstItem="VeG-2s-DgD" firstAttribute="top" secondItem="seq-nI-jmT" secondAttribute="bottom" id="io1-j7-YOW"/>
+                            <constraint firstItem="KCU-V9-bqA" firstAttribute="leading" secondItem="hlK-9B-UZA" secondAttribute="leading" id="u0i-de-stp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -713,7 +723,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add_large.png" width="180" height="180"/>
+        <image name="add_large.png" width="182" height="182"/>
         <image name="alert.png" width="52" height="52"/>
         <image name="back" width="11" height="18"/>
         <image name="eye" width="28" height="20"/>

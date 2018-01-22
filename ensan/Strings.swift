@@ -47,7 +47,7 @@ struct MainStrings {
 	static let guardianAlreadyAdded = "این شماره قبلا اضافه شده"
 	static let error = "خطا!"
 	static let notSent = "پیام ارسال نشد، کسی از شما با خبر نخواهد شد!"
-	static let messageNotSent = "پیاک ارسال نشد"
+	static let messageNotSent = "پیام ارسال نشد"
 	static let addMoreGuardian = "افزودن سرپرست"
 	static let notifiedFine = "نفر از سلامت شما مطلع شدند"
 	static let notifiedHurt = "نفر از حادثه شما مطلع شدند"
@@ -58,6 +58,9 @@ struct MainStrings {
 	static let alert = "توجه!"
 	static let cancel = "لغو"
 	static let badNumber = "شماره انتخاب شده صحیح نیست"
+	static let inDanger = "در خطر است"
+	static let networkError = "شما به اینترنت متصل نیستید"
+	static let loading = "صبور باشید"
 }
 
 struct ValidationErrors {

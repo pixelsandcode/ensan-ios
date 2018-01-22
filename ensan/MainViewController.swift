@@ -11,6 +11,7 @@ import MessageUI
 import ContactsUI
 import Alamofire
 import UserNotifications
+import SwiftSpinner
 
 class MainViewController: UIViewController {
 	
@@ -34,22 +35,23 @@ class MainViewController: UIViewController {
 		
 		// Game is on...
 		if UserInfo.isUser() {
-			self.getGuardians()
+			Helpers.showLoading()
 		}
 		self.setupButtons()
 		self.handleByGuardians()
-		
-		let guardiansCount = UserInfo.getGuardians().count
-		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
-			self.setupNotification()
-		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if !self.pickedContact.sent {
-			self.sendMessage([self.pickedContact.mobile])
-			self.pickedContact.sent = true
+		self.sendDeviceToken()
+		
+		if UserInfo.isUser() {
+			self.getGuardians()
+		}
+		
+		let guardiansCount = UserInfo.getGuardians().count
+		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
+			self.setupNotification()
 		}
 	}
 	
@@ -103,7 +105,12 @@ class MainViewController: UIViewController {
 	
 	// MARK: - Actions
 	func plusTapped() {
-		self.selectContact()
+		if UserInfo.isUser() {
+			self.selectContact()
+		} else {
+			self.pickedContact.sent = false
+			self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
+		}
 	}
 	
 	func viewGuardianTapped() {
@@ -111,11 +118,14 @@ class MainViewController: UIViewController {
 	}
 	
 	func showFine() {
+		
+		self.notifyGuardians(type: "healthy")
 		self.performSegueWithIdentifier(segueIdentifier: .showFine, sender: self)
 	}
 	
 	func showHurt() {
 		if UserInfo.hasSent() {
+			self.notifyGuardians(type: "inDanger")
 			self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
 		} else {
 			UserInfo.setHasSent(value: true)
@@ -207,10 +217,18 @@ class MainViewController: UIViewController {
 	}
 	
 	func sendGuardian() {
+		
+		if !Reachability.connectedToNetwork() {
+			Helpers.alertWithTitle(self, title: MainStrings.error, message: MainStrings.networkError)
+			return
+		}
+		
+		Helpers.showLoading()
 		Alamofire.request(ApiRouter.Router.addGuardian(name: self.pickedContact.name, mobile: self.pickedContact.mobile)).log(.verbose).validate().responseJSON() {
 			response in
 			
 			if response.result.isSuccess {
+				Helpers.hideLoading()
 				var guardians = UserInfo.getGuardians()
 				guardians.append(self.pickedContact)
 				UserInfo.setGuardians(guardians)
@@ -226,6 +244,7 @@ class MainViewController: UIViewController {
 				}
 				self.alertWithTitle(self, title: MainStrings.success, message: MainStrings.invitationSent)
 			} else if response.response?.statusCode == 401 {
+				Helpers.hideLoading()
 				Helpers.login() {
 					success in
 					
@@ -234,19 +253,70 @@ class MainViewController: UIViewController {
 					}
 				}
 			} else {
+				Helpers.hideLoading()
 				self.alertWithTitle(self, title: MainStrings.error, message: MainStrings.notSent)
 			}
 		}
 	}
 	
 	func getGuardians() {
+		
+		if !Reachability.connectedToNetwork() {
+			return
+		}
+		
 		Alamofire.request(ApiRouter.Router.getGuardians()).log(.verbose).validate().responseCollection() {
 			(response: DataResponse<[Guardian]>) in
 			
+			Helpers.hideLoading()
 			if response.result.isSuccess {
 				if let guardians = response.result.value {
 					UserInfo.setGuardians(guardians)
 					self.handleByGuardians()
+				}
+			}
+		}
+	}
+	
+	func notifyGuardians(type: String) {
+		let requestBody = NotifyRequest(type: type)
+		
+		var request = URLRequest(url: URL(string: "http://api.ensanapp.ir/v1/user/notify")!)
+		
+		request.httpMethod = HTTPMethod.post.rawValue
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		request.timeoutInterval = 180
+		if let token = UserInfo.getToken() {
+			request.setValue(token, forHTTPHeaderField: "Authorization")
+		}
+		let json = requestBody.toDict()
+		
+		do {
+			request.httpBody = try JSONSerialization.data(withJSONObject: json)
+		} catch {
+			print("error")
+		}
+		
+		Alamofire.request(request).log(.verbose).validate().responseJSON() {
+			response in
+			
+			if response.result.isSuccess {
+				print("sent")
+			} else {
+				self.alertWithTitle(self, title: MainStrings.error, message: "")
+			}
+		}
+	}
+	
+	func sendDeviceToken() {
+		if UserInfo.isUser() && UserInfo.getNotificationId() != nil {
+			Alamofire.request(ApiRouter.Router.registerDevice()).log().validate().responseJSON() {
+				response in
+				
+				if response.result.isSuccess {
+					print("notification sent to api")
+				} else {
+					print(response.result.error.debugDescription)
 				}
 			}
 		}
@@ -327,12 +397,7 @@ extension MainViewController: CNContactPickerDelegate {
 		
 		picker.dismiss(animated: true) {
 			completed in
-			if UserInfo.isUser() {
-				self.present(messageComposeVC, animated: true, completion: nil)
-			} else {
-				self.pickedContact.sent = false
-				self.performSegueWithIdentifier(segueIdentifier: .showSignUp, sender: self)
-			}
+			self.present(messageComposeVC, animated: true, completion: nil)
 		}
 	}
 	

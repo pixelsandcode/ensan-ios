@@ -44,10 +44,17 @@ class PinViewController: UIViewController {
 	}
 	
 	func verifyPin() {
+		
+		if !Reachability.connectedToNetwork() {
+			Helpers.alertWithTitle(self, title: MainStrings.error, message: MainStrings.networkError)
+			return
+		}
+		
+		Helpers.showLoading()
 		Alamofire.request(ApiRouter.Router.verifyPin(pin: self.enteredPin)).log().validate().responseObject() {
 			
 			(response: DataResponse<User>) in
-			
+			Helpers.hideLoading()
 			if response.result.isSuccess {
 				let _ = Helpers.getAndSaveToken(response: response.response!)
 				let user = response.result.value
