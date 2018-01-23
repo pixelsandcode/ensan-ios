@@ -296,16 +296,18 @@ class MainViewController: UIViewController {
 	}
 	
 	func notifyGuardians(type: String) {
-		var requestBody = NotifyRequest(type: type)
+		var json: [String: Any]
 		if UserInfo.getCurrentLocation()[UserDefaultTag.lat] != 0 {
 			let lat = UserInfo.getCurrentLocation()[UserDefaultTag.lat]!
 			let lon = UserInfo.getCurrentLocation()[UserDefaultTag.lon]!
 			var location = [String: String]()
 			location.updateValue(String(lat), forKey: "lat")
 			location.updateValue(String(lon), forKey: "lon")
-			requestBody = NotifyRequest(type: type, location: location)
+			let requestBody = NotifyWithLocationRequest(type: type, location: location)
+			json = requestBody.toDict()
 		} else {
-			requestBody = NotifyRequest(type: type)
+			let requestBody = NotifyRequest(type: type)
+			json = requestBody.toDict()
 		}
 		
 		var request = URLRequest(url: URL(string: "http://api.ensanapp.ir/v1/user/notify")!)
@@ -316,7 +318,6 @@ class MainViewController: UIViewController {
 		if let token = UserInfo.getToken() {
 			request.setValue(token, forHTTPHeaderField: "Authorization")
 		}
-		let json = requestBody.toDict()
 		
 		do {
 			request.httpBody = try JSONSerialization.data(withJSONObject: json)

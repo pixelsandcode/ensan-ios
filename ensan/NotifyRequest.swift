@@ -10,7 +10,7 @@ import Foundation
 
 protocol JSONAble {}
 
-class NotifyRequest: JSONAble {
+class NotifyWithLocationRequest: JSONAble {
 	var type: String!
 	var location: [String: String]?
 	
@@ -21,6 +21,14 @@ class NotifyRequest: JSONAble {
 	init(type: String, location: [String: String]) {
 		self.type = type
 		self.location = location
+	}
+}
+
+class NotifyRequest: JSONAble {
+	var type: String!
+	
+	init(type: String) {
+		self.type = type
 	}
 }
 

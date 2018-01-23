@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		460CF8FB2017531600A03DD6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CF8FA2017531600A03DD6 /* Location.swift */; };
-		460CF8FD201775EA00A03DD6 /* StringLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CF8FC201775EA00A03DD6 /* StringLocation.swift */; };
 		461602F71FF7B985003721DB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461602F61FF7B985003721DB /* SplashViewController.swift */; };
 		461602FB1FF7BAC0003721DB /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 461602FA1FF7BAC0003721DB /* splash_logo.png */; };
 		461602FD1FF7C1E3003721DB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 461602FC1FF7C1E3003721DB /* logo.png */; };
@@ -52,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		460CF8FA2017531600A03DD6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		460CF8FC201775EA00A03DD6 /* StringLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLocation.swift; sourceTree = "<group>"; };
 		461602F61FF7B985003721DB /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		461602FA1FF7BAC0003721DB /* splash_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_logo.png; sourceTree = "<group>"; };
 		461602FC1FF7C1E3003721DB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 			children = (
 				4627DEB020161ECE00935299 /* NotifyRequest.swift */,
 				460CF8FA2017531600A03DD6 /* Location.swift */,
-				460CF8FC201775EA00A03DD6 /* StringLocation.swift */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -404,7 +401,6 @@
 				462BC220200CA713000C812B /* User.swift in Sources */,
 				461603241FF91C74003721DB /* FineViewController.swift in Sources */,
 				461603161FF7DBD8003721DB /* SegueHandlerType.swift in Sources */,
-				460CF8FD201775EA00A03DD6 /* StringLocation.swift in Sources */,
 				46E36BBA1FFBDB5400368048 /* Guardian.swift in Sources */,
 				46A7D3291FFCD43700B6EA61 /* ApiRouter.swift in Sources */,
 				461603101FF7D539003721DB /* Colors.swift in Sources */,
