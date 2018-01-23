@@ -42,6 +42,10 @@ class MainViewController: UIViewController {
 		}
 		self.setupButtons()
 		self.handleByGuardians()
+		
+		if UserInfo.getGuardians().count >= 3 {
+			self.manageLocationPermission()
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -56,8 +60,6 @@ class MainViewController: UIViewController {
 		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
 			self.setupNotification()
 		}
-		
-		self.manageLocationPermission()
 	}
 	
 	// MARK: Local notification
@@ -134,7 +136,17 @@ class MainViewController: UIViewController {
 			self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
 		} else {
 			UserInfo.setHasSent(value: true)
-			self.alertWithTitle(self, title: ValidationErrors.alert, message: ValidationErrors.sendAlertHint)
+			let alert = UIAlertController(title: ValidationErrors.alert, message: ValidationErrors.sendAlertHint, preferredStyle: .alert)
+			let cancelAction = UIAlertAction(title: MainStrings.cancel, style: .cancel)
+			let sendAction = UIAlertAction(title: MainStrings.send, style: .default) {
+				action in
+				
+				self.performSegueWithIdentifier(segueIdentifier: .showHurt, sender: self)
+			}
+			
+			alert.addAction(cancelAction)
+			alert.addAction(sendAction)
+			self.present(alert, animated: true, completion: nil)
 		}
 	}
 	

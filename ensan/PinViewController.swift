@@ -71,6 +71,7 @@ class PinViewController: UIViewController {
 				let _ = Helpers.getAndSaveToken(response: response.response!)
 				let user = response.result.value
 				if let user = user {
+				UserInfo.setUsername(user.name)
 					User.saveUser(user)
 					self.sendDeviceToken()
 					for controller in self.navigationController!.viewControllers as Array {

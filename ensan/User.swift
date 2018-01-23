@@ -21,6 +21,7 @@ final class User: ResponseObjectSerializable {
 			return
 		}
 		
+		self.name = data["name"] as? String
 		self.auth = data["auth"] as? String
 		self.docKey = data["docKey"] as? String
 		self.state = data["state"] as? String
