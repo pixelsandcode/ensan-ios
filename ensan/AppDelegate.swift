@@ -6,10 +6,12 @@
 //  Copyright © 2017 Ashkan Hesaraki. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Firebase
 import UserNotifications
 import Alamofire
+import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		if #available(iOS 10.0, *) {
 			// For iOS 10 display notification (sent via APNS)
+			self.setCategories()
 			UNUserNotificationCenter.current().delegate = self
 			
 			let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -95,6 +98,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Messaging.messaging().apnsToken = deviceToken
 	}
 	
+	func setCategories(){
+		if #available(iOS 10.0, *) {
+			let callAction = UNNotificationAction(identifier: "call.action", title: "Call", options: [])
+			let mapAction = UNNotificationAction(identifier: "map.action", title: "Map", options: [])
+			let dangerCategory = UNNotificationCategory(identifier: "DANGER_CATEGORY", actions: [callAction, mapAction], intentIdentifiers: [], options: [])
+			UNUserNotificationCenter.current().setNotificationCategories([dangerCategory])
+		} else {
+			// Fallback on earlier versions
+		}
+	}
+	func openMapForPlace(lat: Double, lon: Double, name: String) {
+		
+		let latitude: CLLocationDegrees = lat
+		let longitude: CLLocationDegrees = lon
+		
+		let regionDistance:CLLocationDistance = 10000
+		let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+		let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+		let options = [
+			MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+			MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+		]
+		let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+		let mapItem = MKMapItem(placemark: placemark)
+		mapItem.name = name
+		mapItem.openInMaps(launchOptions: options)
+	}
+	
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -139,7 +170,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 		print(userInfo)
 		
 		// Change this to your preferred presentation option
-		completionHandler([])
+		
+		completionHandler([.alert, .badge, .sound])
 	}
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -153,6 +185,35 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 		
 		// Print full message.
 		print(userInfo)
+		
+		let action = response.actionIdentifier
+		let request = response.notification.request
+		let _ = request.content
+		
+		if action == "call.action" {
+			if let mobile = userInfo["mobile"] as? String {
+				let url: NSURL = URL(string: "TEL://\(mobile)")! as NSURL
+				UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+			}
+		}
+		
+		if action == "map.action" {
+			guard let lat = userInfo["lat"] as? String else {
+				return
+			}
+
+			guard let lon = userInfo["lon"] as? String else {
+				return
+			}
+			
+			guard let name = userInfo["name"] as? String else {
+				return
+			}
+			
+			if let latitude = Double(lat), let longitude = Double(lon) {
+				self.openMapForPlace(lat: latitude, lon: longitude, name: name)
+			}
+		}
 		
 		completionHandler()
 	}
