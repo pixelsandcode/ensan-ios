@@ -12,6 +12,7 @@ import ContactsUI
 import Alamofire
 import UserNotifications
 import SwiftSpinner
+import CoreLocation
 
 class MainViewController: UIViewController {
 	
@@ -28,6 +29,8 @@ class MainViewController: UIViewController {
 	
 	var pickedContact: Guardian = Guardian()
 	let gcmMessageIDKey = "gcm.message_id"
+	let locationManager = CLLocationManager()
+	var location: Location?
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -53,6 +56,8 @@ class MainViewController: UIViewController {
 		if !UserInfo.notificationScheduled() && guardiansCount == 0 {
 			self.setupNotification()
 		}
+		
+		self.manageLocationPermission()
 	}
 	
 	// MARK: Local notification
@@ -279,7 +284,17 @@ class MainViewController: UIViewController {
 	}
 	
 	func notifyGuardians(type: String) {
-		let requestBody = NotifyRequest(type: type)
+		var requestBody = NotifyRequest(type: type)
+		if UserInfo.getCurrentLocation()[UserDefaultTag.lat] != 0 {
+			let lat = UserInfo.getCurrentLocation()[UserDefaultTag.lat]!
+			let lon = UserInfo.getCurrentLocation()[UserDefaultTag.lon]!
+			var location = [String: String]()
+			location.updateValue(String(lat), forKey: "lat")
+			location.updateValue(String(lon), forKey: "lon")
+			requestBody = NotifyRequest(type: type, location: location)
+		} else {
+			requestBody = NotifyRequest(type: type)
+		}
 		
 		var request = URLRequest(url: URL(string: "http://api.ensanapp.ir/v1/user/notify")!)
 		
@@ -297,7 +312,7 @@ class MainViewController: UIViewController {
 			print("error")
 		}
 		
-		Alamofire.request(request).log(.verbose).validate().responseJSON() {
+		let httpRequest = Alamofire.request(request).log(.verbose).validate().responseJSON() {
 			response in
 			
 			if response.result.isSuccess {
@@ -306,6 +321,8 @@ class MainViewController: UIViewController {
 				self.alertWithTitle(self, title: MainStrings.error, message: "")
 			}
 		}
+		
+		print(httpRequest)
 	}
 	
 	func sendDeviceToken() {
@@ -315,11 +332,61 @@ class MainViewController: UIViewController {
 				
 				if response.result.isSuccess {
 					print("notification sent to api")
-					print(UserInfo.getNotificationId())
+					print(UserInfo.getNotificationId() ?? "nothing")
 				} else {
 					print(response.result.error.debugDescription)
 				}
 			}
+		}
+	}
+	
+	// MARK: - Location
+	func manageLocationPermission() {
+		switch CLLocationManager.authorizationStatus() {
+		case .restricted, .denied:
+			let locationAlert = UIAlertController(title: MainStrings.alert, message: MainStrings.needLocation, preferredStyle: .alert)
+			let cancelAction = UIAlertAction(title: MainStrings.cancel, style: .cancel)
+			let settingAction = UIAlertAction(title: "تنظیمات", style: .default) {
+				action in
+				
+				self.enableLocation()
+			}
+			
+			locationAlert.addAction(cancelAction)
+			locationAlert.addAction(settingAction)
+			self.present(locationAlert, animated: true, completion: nil)
+			return
+		case .notDetermined:
+			self.getLocationPermission()
+			return
+		case .authorizedWhenInUse:
+			if self.location == nil || self.location?.lat == 0 {
+				self.getLocation()
+			}
+			
+			return
+		default:
+			return
+		}
+	}
+	
+	func getLocationPermission() {
+		locationManager.requestWhenInUseAuthorization()
+		
+		self.getLocation()
+	}
+	
+	func enableLocation() {
+		if let url = URL(string:UIApplicationOpenSettingsURLString) {
+			UIApplication.shared.openURL(url)
+		}
+	}
+	
+	func getLocation() {
+		if CLLocationManager.locationServicesEnabled() {
+			locationManager.delegate = self
+			locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+			locationManager.startUpdatingLocation()
 		}
 	}
 	
@@ -406,3 +473,19 @@ extension MainViewController: CNContactPickerDelegate {
 		print("contact picker cancelled")
 	}
 }
+
+//MARK: - Location Delegate
+extension MainViewController: CLLocationManagerDelegate {
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		let currentLocation: CLLocationCoordinate2D = manager.location!.coordinate
+		self.location = Location(lat: currentLocation.latitude, lon: currentLocation.longitude)
+		UserInfo.setCurrentLocation(currentLocation.latitude, longitude: currentLocation.longitude)
+		locationManager.stopUpdatingLocation()
+		locationManager.delegate = nil
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print(error)
+	}
+}
+

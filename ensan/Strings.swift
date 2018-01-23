@@ -35,6 +35,8 @@ struct UserDefaultTag {
 	static let userId = "userId"
 	static let notificationId = "notificationId"
 	static let version = "appVersion"
+	static let lat = "lat"
+	static let lon = "lon"
 }
 
 struct MainStrings {
@@ -62,6 +64,7 @@ struct MainStrings {
 	static let networkError = "شما به اینترنت متصل نیستید"
 	static let loading = "صبور باشید"
 	static let wrongPin = "کد اشتباه است"
+	static let needLocation = "موقعیت مکانی شما برای مواقع خطر لازم است تا برای دوستانتان فرستاده شود"
 }
 
 struct ValidationErrors {

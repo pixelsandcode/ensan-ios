@@ -12,9 +12,15 @@ protocol JSONAble {}
 
 class NotifyRequest: JSONAble {
 	var type: String!
+	var location: [String: String]?
 	
 	init(type: String) {
 		self.type = type
+	}
+	
+	init(type: String, location: [String: String]) {
+		self.type = type
+		self.location = location
 	}
 }
 

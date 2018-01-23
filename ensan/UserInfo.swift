@@ -115,4 +115,15 @@ class UserInfo {
 	static func getUserId() -> String? {
 		return UserDefaults.standard.object(forKey: UserDefaultTag.userId) as? String
 	}
+	
+	static func getCurrentLocation() -> [String: Double] {
+		let latitude = UserDefaults.standard.double(forKey: UserDefaultTag.lat)
+		let longitude = UserDefaults.standard.double(forKey: UserDefaultTag.lon)
+		return [UserDefaultTag.lat: latitude, UserDefaultTag.lon: longitude]
+	}
+	
+	static func setCurrentLocation(_ latitude: Double, longitude: Double) {
+		UserDefaults.standard.set(latitude, forKey: UserDefaultTag.lat)
+		UserDefaults.standard.set(longitude, forKey: UserDefaultTag.lon)
+	}
 }
