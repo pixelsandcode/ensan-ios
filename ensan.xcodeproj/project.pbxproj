@@ -245,6 +245,7 @@
 				468A60B91FF7B5A200157FBD /* Resources */,
 				D3EFD0550CF577257E7BEFDF /* [CP] Embed Pods Frameworks */,
 				2F2F587A350CA81AAE842E7E /* [CP] Copy Pods Resources */,
+				46CA2C5520220CAD005914B3 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -338,6 +339,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ensan/Pods-ensan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		46CA2C5520220CAD005914B3 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		D1F4872A058AE6FADA82D82A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -565,8 +580,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ir.app.ensan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "176f7d58-d7d6-46aa-9312-6293217f62d4";
-				PROVISIONING_PROFILE_SPECIFIER = "Ensan Store";
+				PROVISIONING_PROFILE = "04d93537-51f8-46b2-ae54-d7feb28c2ba3";
+				PROVISIONING_PROFILE_SPECIFIER = "Ensan AdHoc";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

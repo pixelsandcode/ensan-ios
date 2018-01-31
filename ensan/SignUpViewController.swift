@@ -51,9 +51,7 @@ class SignUpViewController: UIViewController {
 	}
 	
 	func isNameValid(name: String) -> Bool {
-		let NAME_REGEX = "^([a-zA-Z]{2,}\\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)"
-		let nameTest = NSPredicate(format: "SELF MATCHES %@", NAME_REGEX)
-		let result = nameTest.evaluate(with: name)
+		let result = name.contains(" ")
 		return result
 	}
 	
