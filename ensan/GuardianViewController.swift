@@ -185,6 +185,25 @@ extension GuardianViewController: UITableViewDataSource {
 		
 		return cell
 	}
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			let objId = self.guardians[indexPath.row].id
+			if !objId.isEmpty {
+				Helpers.showLoading()
+				Alamofire.request(ApiRouter.Router.deleteGuardian(id: objId)).validate().log().responseCollection() {
+					
+					(response: DataResponse<[Guardian]>) in
+					
+					Helpers.hideLoading()
+					if response.result.isSuccess {
+						self.guardians.remove(at: indexPath.row)
+						self.tableView.reloadData()
+					}
+				}
+			}
+		}
+	}
 }
 
 //MARK: - MFMessageComposerDelegate Method

@@ -14,6 +14,7 @@ final class Guardian: NSObject, NSCoding, ResponseCollectionSerializable {
 	var mobile: String = ""
 	var sent: Bool = true
 	var state: String = "Pending"
+	var id: String = ""
 	
 	override init() {
 	}
@@ -23,6 +24,7 @@ final class Guardian: NSObject, NSCoding, ResponseCollectionSerializable {
 		self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
 		self.mobile = aDecoder.decodeObject(forKey: "mobile") as? String ?? ""
 		self.state = aDecoder.decodeObject(forKey: "state") as? String ?? ""
+		self.id = aDecoder.decodeObject(forKey: "id") as? String ?? ""
 	}
 	
 	func encode(with aCoder: NSCoder) {
@@ -30,6 +32,7 @@ final class Guardian: NSObject, NSCoding, ResponseCollectionSerializable {
 		aCoder.encode(mobile, forKey: "mobile")
 		aCoder.encode(state, forKey: "state")
 		aCoder.encode(sent, forKey: "sent")
+		aCoder.encode(id, forKey: "id")
 	}
 	
 	init(name: String, mobile: String) {
@@ -41,6 +44,7 @@ final class Guardian: NSObject, NSCoding, ResponseCollectionSerializable {
 		self.name = representation["name"] as! String
 		self.mobile = representation["mobile"] as! String
 		self.state = representation["state"] as! String
+		self.id = representation["docKey"] as! String
 	}
 	
 	static func collection(from response: HTTPURLResponse, withRepresentation representation: Any) -> [Guardian] {

@@ -28,4 +28,11 @@ class FineViewController: UIViewController {
 	@IBAction func imageTapped(_ sender: Any) {
 		self.back()
 	}
+	
+	func back() {
+		guard let _ = (navigationController?.popViewController(animated: true)) else {
+			dismiss(animated: true, completion: nil)
+			return
+		}
+	}
 }
