@@ -13,6 +13,7 @@ class HurtViewController: UIViewController {
 	
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var hurtImageView: UIImageView!
+	@IBOutlet var mainView: UIView!
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -25,9 +26,16 @@ class HurtViewController: UIViewController {
 		let guardians = UserInfo.getGuardians()
 		let numbers = guardians.map({$0.mobile})
 		self.sendMessage(numbers)
+		
+		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
+		self.mainView.addGestureRecognizer(backTGR)
 	}
 	
 	@IBAction func imageTapped(_ sender: Any) {
+		self.back()
+	}
+	
+	func back() {
 		guard let _ = (navigationController?.popViewController(animated: true)) else {
 			dismiss(animated: true, completion: nil)
 			return

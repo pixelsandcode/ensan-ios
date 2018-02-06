@@ -12,6 +12,7 @@ class FineViewController: UIViewController {
 	
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var fineImageView: UIImageView!
+	@IBOutlet var mainView: UIView!
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -20,12 +21,11 @@ class FineViewController: UIViewController {
 		// Game is on ...
 		let guardiansCount = UserInfo.getGuardians().filter({$0.state == "joined"}).count
 		self.descriptionLabel.text = "\(guardiansCount) \(MainStrings.notifiedFine)"
+		let backTGR = UITapGestureRecognizer(target: self, action: #selector(self.back))
+		self.mainView.addGestureRecognizer(backTGR)
 	}
 	
 	@IBAction func imageTapped(_ sender: Any) {
-		guard let _ = (navigationController?.popViewController(animated: true)) else {
-			dismiss(animated: true, completion: nil)
-			return
-		}
+		self.back()
 	}
 }
